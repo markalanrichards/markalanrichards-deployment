@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-03-05T00:43:21+00:00</updated><id>/feed.xml</id><title type="html">Mark Alan Richards</title><entry><title type="html">Reset Password Links are a Security Failure according to the HTTP RFC</title><link href="/2018/08/12/reset-password-links-are-a-security-failure-according-to-the-http-rfc.html" rel="alternate" type="text/html" title="Reset Password Links are a Security Failure according to the HTTP RFC" /><published>2018-08-12T11:39:23+00:00</published><updated>2018-08-12T11:39:23+00:00</updated><id>/2018/08/12/reset-password-links-are-a-security-failure-according-to-the-http-rfc</id><content type="html" xml:base="/2018/08/12/reset-password-links-are-a-security-failure-according-to-the-http-rfc.html">&lt;h1&gt;tl;dr&lt;/h1&gt;
+https://tools.ietf.org/html/rfc7231#section-9.4
+&lt;pre class=&quot;newpage&quot;&gt; URIs are intended to be shared, not secured, even when they identify
+   secure resources.&lt;/pre&gt;
+&amp;nbsp;
+&lt;h1&gt;Reset Password Link&lt;/h1&gt;
+Reset password links typically work by generating a unique URL containing enough random data to be considered impossible to guess.
+
+The user opens the URL, the request is validated by the service provider and they then offer a user the ability to set a new password.
+&lt;h1&gt;Why a failure?&lt;/h1&gt;
+The reset password page may include the following and lose the link as a referer:
+&lt;ul&gt;
+	&lt;li&gt;links to same origin pages: document.referer available to third party JS&lt;/li&gt;
+	&lt;li&gt;links to third party pages: referer sent to third parties when clicked&lt;/li&gt;
+	&lt;li&gt;third party content: referer sent to third parties on reset password page load
+&lt;ul&gt;
+	&lt;li&gt;shared libraries from CDNs (eg: bootstrapcdn)&lt;/li&gt;
+	&lt;li&gt;analytics and social media spyware&lt;/li&gt;
+	&lt;li&gt;ironic fraud detection JS (some finance sites)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Nobody would load third party content on their reset password page?&lt;/h1&gt;
+I've found it on sites by these companies:
+&lt;ul&gt;
+	&lt;li&gt;NHS&lt;/li&gt;
+	&lt;li&gt;Gumtree&lt;/li&gt;
+	&lt;li&gt;Uber&lt;/li&gt;
+	&lt;li&gt;Daily Mail&lt;/li&gt;
+	&lt;li&gt;Zopa&lt;/li&gt;
+	&lt;li&gt;123-reg&lt;/li&gt;
+	&lt;li&gt;...&lt;/li&gt;
+&lt;/ul&gt;
+*Some have fixed it!
+&lt;h1&gt;&quot;But it's okay on https&quot;?&lt;/h1&gt;
+No, that's a myth I've heard a few times. There is a security improvement on HTTPS, but it is only that it won't be sent to http sites. It is still available to third party http JS loaded on the page (document.referer) and it's sent to all other HTTPS sites.
+&lt;h1&gt;&quot;But they will only used by the user&quot;?&lt;/h1&gt;
+&lt;h2&gt;What evidence do you have of this?&lt;/h2&gt;
+I saw opposing evidence, one company admitted 5% of requests to their reset password pages were from multiple sources and I've seen logs showing user agents for reset password links as bots.
+&lt;h2&gt;So how do they use it?&lt;/h2&gt;
+A percentage of users will not complete the request after opening it. They may get distracted (meeting notification, baby screaming, train entering a tunnel, endless numbers of reasons for why you might not finish what you are doing on a page).
+
+Also, users cannot beat a bot. Once the password has leaked to a third party an automated system would reset the password quite quickly.
+&lt;h2&gt;But wouldn't users notice?&lt;/h2&gt;
+Maybe, but I'd suggest that without evidence, most users would consider it a bug that the reset password page failed and retry (maybe assume that the link expired) and if they got an email suggesting it succeeded, might believe they'd typed their password wrongly when entering it into the reset password flow (had caps lock on?) so would try again.
+&lt;h2&gt;But wouldn't the website notice?&lt;/h2&gt;
+Depends on what it is used for. If you wanted to steal data, then without any malicious changes to the site you could grab user data. Also, if you kept the percentage of requests low for malcious changes, like purchases, then it'd be within expected bounds for account fraud and the user would likely be blamed.
+&lt;h1&gt;But you can protect it? Yes, but can your developers?&lt;/h1&gt;
+As with most of the web, it is not designed with security in mind. It is an after thought.
+
+In this instance, you need to learn about Referer policies and the dangers of loading third party JavaScript, or you could use multiple factors of authentication or only include the randomised token in the transmission to the user (so they have to type it).
+
+Given the companies I've seen fail at this (and I'm guessing the list is very long I just don't have time to fish them all out) then I doubt most companies employ developers who know how to both create a secure reset password page and then maintain it (from the risks of someone thinking, great I'll add Google Analytics to the page, an explicit breach of GA's terms).
+&lt;h1&gt;Bug Bounty Time&lt;/h1&gt;
+This is a simple bug bounty win... go get 'em!
+
+&amp;nbsp;
+
+&amp;nbsp;</content><author><name></name></author><summary type="html">tl;dr https://tools.ietf.org/html/rfc7231#section-9.4 URIs are intended to be shared, not secured, even when they identify secure resources. &amp;nbsp; Reset Password Link Reset password links typically work by generating a unique URL containing enough random data to be considered impossible to guess.</summary></entry><entry><title type="html">Facebook JavaScript SDK is often illegal</title><link href="/2018/06/23/facebook-javascript-sdk-is-often-illegal.html" rel="alternate" type="text/html" title="Facebook JavaScript SDK is often illegal" /><published>2018-06-23T18:34:14+00:00</published><updated>2018-06-23T18:34:14+00:00</updated><id>/2018/06/23/facebook-javascript-sdk-is-often-illegal</id><content type="html" xml:base="/2018/06/23/facebook-javascript-sdk-is-often-illegal.html">&lt;a href=&quot;https://developers.facebook.com/docs/javascript/&quot;&gt;Facebook JavaScript SDK&lt;/a&gt; is often included in websites.
+
+It provides feature to help integrate with Facebook.
+
+It provides Facebook with tracking capabilities that assist with audience data and their advertising targeting.
+
+From a privacy perspective, under GDPR, this is a consent nightmare and although it may be possible to get legitimate explicit consent to send data to Facebook, is it still legal to be given when there is a second problem... security and access control.
+
+If a website loads third party JavaScript into a page using a &amp;lt;script&amp;gt; tag then by default it loads with a security context of same-origin - this means that it often it can do whatever JavaScript hosted from the websites' server can do, so likely:
+&lt;ul&gt;
+	&lt;li&gt;Read any content on the page it is loaded
+&lt;ul&gt;
+	&lt;li&gt;Read your user details and often session cookies&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Modify (add/change/remove) any content on the page
+&lt;ul&gt;
+	&lt;li&gt;Add a username and password field, capture the values&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Make network requests to the websites' servers
+&lt;ul&gt;
+	&lt;li&gt;POST form data&lt;/li&gt;
+	&lt;li&gt;Send ajax requests to backend servers as you&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Make network requests elsewhere
+&lt;ul&gt;
+	&lt;li&gt;Append data read to image or script links and add them to the page&lt;/li&gt;
+	&lt;li&gt;Make an AJAX call to its own servers or elsewhere&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Access any webpage on your site and do all of the above&lt;/strong&gt;
+&lt;ul&gt;
+	&lt;li&gt;&lt;strong&gt;If Facebook is loaded on /about, it can iframe /user/account&lt;/strong&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Default security context of iframes in the same domain is that it can access the child iframe and execute scripts in that iframe.&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+There are various security mechanisms that may reduce this risk, but the problem with these, is that they are very complex to implement: adding in security contexts to ban eval(), SRI, CORS headers  and more, requires a lot of security review: but also it negates much if not all of the Facebook functionality if you ban Facebook from receiving data, so why load it?
+&lt;blockquote&gt;&lt;strong&gt;Put this all together and you can demonstrate to organisations that they need to remove Facebook.&lt;/strong&gt;&lt;/blockquote&gt;
+&lt;strong&gt;So I got Facebook removed from RBS's online banking landing page because it could access the account pages (which it was not loaded on).&lt;/strong&gt;
+
+And I got it removed off of a noticeable amount of nhs.uk because when loaded on pages offering advice (like about Flu) it could access data about your GP and your account.
+
+https://www.youtube.com/watch?v=Ls08tSt-Dko
+
+https://www.youtube.com/watch?v=IhrpWhOnVQE
+&lt;h2&gt;Why is it illegal?&lt;/h2&gt;
+Especially in regulated contexts (finance, healthcare, etc) there are typically requirements that companies must maintain control of their systems (&lt;a href=&quot;https://www.handbook.fca.org.uk/handbook/SYSC/3/1.html&quot;&gt;https://www.handbook.fca.org.uk/handbook/SYSC/3/1.html&lt;/a&gt;) and this cannot mean providing an advertising company with unaudited, uncontrolled access to do whatever it likes. This isn't like self-hosted JS that would have gone through QA processes to validate it.
+
+But GDPR and similar privacy laws internationally, also demand that companies have access controls. Not just for what they want to give companies (that's a consent/legitimate interest problem), but to make sure they cannot access other data they don't have rights to. So should Facebook have access to do whatever they like without any control?
+
+Why should Facebook get access to your account data, be able to do anything on a page or more? Whether you believe Facebook is safe or not is not important. Whatever you justify here for Facebook to have access to, you justify for any organisation, (so gambling, religious, policing, political, etc: why is an advertising company any better?) in any jurisdiction that the UK has a data protection relationship with and when it comes to the USA, that relationship is pretty terrible: the ICO rarely if ever does anything (beyond getting 'promises') when it comes to US  companies and in dialogue with them appears to not be able to regulate them.
+
+For NHS users, please check this petition: &lt;a href=&quot;https://www.change.org/p/uk-parliament-nhs-should-respect-privacy-online&quot;&gt;https://www.change.org/p/uk-parliament-nhs-should-respect-privacy-online&lt;/a&gt; as Facebook is not completely removed from their online services, only from some areas.
+
+&amp;nbsp;</content><author><name></name></author><summary type="html">Facebook JavaScript SDK is often included in websites.</summary></entry><entry><title type="html">NHS provided advertisers, analytics and social media companies with data about your health concerns</title><link href="/2018/06/23/nhs-provided-advertisers-analytics-and-social-media-companies-with-data-about-your-health-concerns.html" rel="alternate" type="text/html" title="NHS provided advertisers, analytics and social media companies with data about your health concerns" /><published>2018-06-23T10:46:44+00:00</published><updated>2018-06-23T10:46:44+00:00</updated><id>/2018/06/23/nhs-provided-advertisers-analytics-and-social-media-companies-with-data-about-your-health-concerns</id><content type="html" xml:base="/2018/06/23/nhs-provided-advertisers-analytics-and-social-media-companies-with-data-about-your-health-concerns.html">Back in 2010, Tom Watson MP raised a problem in parliament.
+&lt;a href=&quot;https://www.theregister.co.uk/2010/11/24/nhs_connect_facebook_privacy_fears/&quot;&gt;https://www.theregister.co.uk/2010/11/24/nhs_connect_facebook_privacy_fears/&lt;/a&gt;
+
+That was not resolved: instead, Facebook, Google, WebTrends and many more got and still get a lot of data about your browsing habits on the NHS services online.
+
+Do not expect it to be anonymised: I found that the data is often identifiable to your email address or online accounts with the companies.
+
+Where they are not, they are often identifiable to a profile about you &lt;strong&gt;which is also a breach of your privacy!&lt;/strong&gt;
+
+FYI: I want this to stop as soon as possible so have added created two petitions that you can sign if you wish.
+&lt;ul&gt;
+	&lt;li&gt;&lt;a href=&quot;https://www.change.org/p/uk-parliament-nhs-should-respect-privacy-online&quot;&gt;https://www.change.org/p/uk-parliament-nhs-should-respect-privacy-online&lt;/a&gt; (can be petitioned on an international basis, NHS isn't just a service used by UK citizens and provides space to give details)&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;https://petition.parliament.uk/petitions/222766&quot;&gt;https://petition.parliament.uk/petitions/222766&lt;/a&gt; (awaiting review, not such space to describe)&lt;/li&gt;
+&lt;/ul&gt;
+This is illegal, privacy is a requirement for healthcare and has been long before GDPR, but there are three things to take away:
+&lt;h2&gt;What they got&lt;/h2&gt;
+Facebook and others were told for over 7 years about what concerns you had for your health. The details sent to them were often in context of you, like your Facebook user id. The advertising arms of some of the companies uses this data as &quot;audience&quot; data and whether they filtered NHS or not, their motive for asking for it, was to discriminate on whether you were targeted for marketing campaigns: this is one of the primary reasons why healthcare should be private... if they did use the data, then expect to have suffered adverts for funeral directors when you looked for cancer, ecigarettes when you tried to stop smoking, etc, in an advertising context, this nature of data leaking is quite disturbing and would put people at risk of advertising when they are at most risk.
+&lt;h2&gt;They put at risk more from what they got&lt;/h2&gt;
+If these companies wished to, then they had access to a treasure trove of information about significant people in the public. From companies executives and celebrities, to whistleblowers and criminals. Had this data leaked (leaks can easily happen https://www.zdnet.com/article/alteryx-s3-leak-leaves-120m-american-households-exposed/) or been hacked then the risk to not just individuals but what they are involved with could have affected reputations, legal cases and allowed for insider trading.
+&lt;h2&gt;They got access to do a lot more!&lt;/h2&gt;
+Most of the companies execute JavaScript on the NHS website. This capability allowed them to follow mouse movements, keyboard presses, read content on the pages and even load other pages on the NHS website with access to do any of those too (thanks to iframes in the web sharing a security context if from the same origin). They could also manipulate content, add in username/passwords fields or ask for any data they liked with the appearance that the NHS was asking. This isn't just hypothetical postulation, the security access was compromised when one of the third parties was hacked to use the NHS website (not all of the site used Browsaloud) for cryptomining on people's web browers https://www.tsg.com/blog/security/ico-nhs-among-thousands-websites-hacked-sneaky-crypto-mining-code
+&lt;h2&gt;Protect yourselves from the NHS&lt;/h2&gt;
+Look into Tor, Brave Browser, Privacy Badger and similar technologies to stop trackers.
+
+Use one off private browsing mode sessions where possible too.
+
+Look into alternative healthcare sites... seriously, there might be some other public health bodies, especially from other countries, that may protect your privacy better.
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+We should take legal action against the NHS. Not because we want to take money out of it, but because they need to stop. The precedent set by allowing the NHS to do this, would be to allow everyone to.
+&lt;h2&gt;Some background&lt;/h2&gt;
+I noticed this last year when trying to make sense of how &lt;a href=&quot;https://joinpouch.com/&quot;&gt;https://joinpouch.com/&lt;/a&gt; (seriously, do not join them, they were a security nightmare when I looked into this), were able to advertise an e-cigarette company on the NHS Stoptober campaign (their extension matched the nhs page against a dictionary they provided the extension to be sent the advert and captured tracking data on your visit).
+
+Whilst investigating I spotted various analytics, tracking and advertising companies loading on the Stoptober page and thought, this can't all be Pouch: they're bad, but not that bad and sure enough, with the extension not installed it turned out the NHS website was a mess of online tracking.
+
+Then started months of emails to and fro between NHS Choices/Digital, NHS England and Public Health England: along with my MP, Matthew Hancock's office, the ICO and a few organisations and journalists I've tried to rally to help.
+
+The position now:
+&lt;ul&gt;
+	&lt;li&gt;NHS England largely agreed, they removed much of the advertisers/social media tracking: I think they can do better&lt;/li&gt;
+	&lt;li&gt;NHS Digital largely agreed and they removed much advertisers/social media on the NHS Choices pages.&lt;/li&gt;
+	&lt;li&gt;Public Health England pretty much ignored the complaint and said users have agreed to it.&lt;/li&gt;
+&lt;/ul&gt;
+&amp;nbsp;
+
+&amp;nbsp;
+
+&amp;nbsp;
+
+&amp;nbsp;</content><author><name></name></author><summary type="html">Back in 2010, Tom Watson MP raised a problem in parliament. https://www.theregister.co.uk/2010/11/24/nhs_connect_facebook_privacy_fears/</summary></entry><entry><title type="html">Mozilla is Evil</title><link href="/2018/04/08/mozilla-is-evil.html" rel="alternate" type="text/html" title="Mozilla is Evil" /><published>2018-04-08T01:05:31+00:00</published><updated>2018-04-08T01:05:31+00:00</updated><id>/2018/04/08/mozilla-is-evil</id><content type="html" xml:base="/2018/04/08/mozilla-is-evil.html">Firstly, many browsers are not your friends, so this is not a Mozilla is worse than X post.
+&lt;h2&gt;So why bash Mozilla?&lt;/h2&gt;
+Google get bashed, Microsoft get bashed and Apple do, but the alternative is not a saint. It boasts about privacy, but doesn't enable it for most users, it complains about tracking and then teaches web developers how to do it. It has had complaints for around a &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=467257&quot;&gt;decade&lt;/a&gt; (since then there have been others, like &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=970092&quot;&gt;970092&lt;/a&gt; ) that user privacy is being invaded because of browser features.
+&lt;h2&gt;But Mozilla are just following a standard?&lt;/h2&gt;
+Mozilla staff can often play a key role in changing the web, from work on drafting standards to work on demonstrating new ideas with new features that are yet to be fully standardised.
+Web standards are not legal requirements and there is nothing to stop Mozilla either breaking from them to fix privacy and security or providing a default alternative release or feature flags that protect users.
+&lt;h2&gt;Fixing the design that would break everyone?&lt;/h2&gt;
+So? Apple broke a lot when they stopped supporting Flash. Is Firefox incapable of leading beyond broken standards, to protect users when others have already demonstrated a precedent that it can be done? Firefox can even re-use the same security pattern adopted for SSL certificates that if you get into trouble you can opt-in to delegate to a less secure mode on a site.
+&lt;h2&gt;So why does Mozilla have to lead?&lt;/h2&gt;
+Because they boast of caring about privacy.
+
+Sites like https://advocacy.mozilla.org/en-US and https://www.mozilla.org/en-US/privacy/firefox/ boast of how they wish to defend privacy, but their flagship product fails most users.
+
+Sorry, but whatever you do to cure the minority, if the majority are still suffering, then boasting about the minority is a falsehood. It's like BP boasting about it's solar energy project... great job, but they're still mostly an oil company. Firefox is still mostly a web browser business for which most of their users have their privacy breached because of the insecure design of the flagship product.
+&lt;h2&gt;But they have private browsing mode and tracking protection?&lt;/h2&gt;
+&lt;ul&gt;
+	&lt;li&gt;Private browsing is designed primarily at local privacy from others users of a machine, don't confuse it. In doing so it achieved some mitigation of tracking cookies, but not saving history, searches, cookies, temporary files is quite an expensive feature set to lose that people typically would like to have because they trust their local machine, it's the remote ones they want to protect themselves from.&lt;/li&gt;
+	&lt;li&gt;Which brings us to tracking protection that when included blocks &quot;many&quot; trackers.... Many? That's not enough and on notable sites including health services I've found tracking still happens and referer urls are still sent.&lt;/li&gt;
+	&lt;li&gt;It isn't turned on by default, so for you &lt;strong&gt;to be beter protected, your first thought after installing Firefox has to be, I don't trust Firefox to protect my privacy by default,&lt;/strong&gt; I need to configure that in and how many users think like that and then how many know what to do - (please at least install something like Privacy Badger from a very trusted source).&lt;/li&gt;
+	&lt;li&gt;But... neither solve the problems of third party JavaScript running in the same context as the site you are using. This is a fundamental failure in the design of the web and one they acknowledge https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Security_best_practices - so they advise devs (if you find this page), don't do it, but don't advise their users when it is happening. Show a red flag, a do you want to continue notice or something to advise people this site executes remote JS.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;But it's not their fault websites include tracking, it's web developers who add this stuff?&lt;/h2&gt;
+&lt;ul&gt;
+	&lt;li&gt;Mozilla teach developers to add it https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Introduction&lt;/li&gt;
+	&lt;li&gt;Mozilla even showcase tracking happening on their own site https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Other_embedding_technologies ironically, whilst also describing it is a security problem&lt;/li&gt;
+	&lt;li&gt;You have to go out of your way to then find the pages on why you shouldn't do this if you need security https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Security_best_practices then from my experience and watching other developers, the time between learning how to add insecure features and learning how to spot and fix that is typically years... not one or two years, maybe 5-10 if you're a good developer.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;But you're blowing this out of proportion&lt;/h2&gt;
+No, when Snowden blew the whistle and shouted we were all being watched, he didn't recommend Firefox, he suggested Tor browser and that was five years ago. The fundamental design of the internet was failing society and in the last five years since, Mozilla hasn't protected most of its users. It cares about them as much as maybe BP cares about clean energy.
+
+I've been complaining to various companies and regulators for years about browsers leaking data. The UK regulator even blogged about my complaint https://iconewsblog.org.uk/2015/09/16/does-your-website-have-a-leak/ as millions of users and several major sites suffered a major problem I found.
+
+Since then I've started demonstrating some of the problems I've found https://www.youtube.com/channel/UCt0RTPkU-38xn5rUxZsWTig/videos and typically these problems boil down to URLs are leaking personal information in referer headers, tracking IDs are shared in cookies that allow cross referencing of personal information between sites to build up an identifiable tracking picture and third party JavaScript executed in the same context as same-origin scripts can perform complete account takeover and surveillance on a per user basis with little if any ability for a website to audit or realise it happening if an attack uses a little competence.
+
+I'm not alone... browser based attacks are becoming more common and you only have to search Google News briefly to find things like:
+&lt;ul&gt;
+	&lt;li&gt;https://www.v3.co.uk/v3-uk/news/3026428/ico-website-taken-down-after-it-was-hacked-to-spread-coinhive-monero-mining-malware&lt;/li&gt;
+	&lt;li&gt;https://arstechnica.com/information-technology/2017/10/equifax-website-hacked-again-this-time-to-redirect-to-fake-flash-update/&lt;/li&gt;
+&lt;/ul&gt;
+Some aren't even attacks that were intended to be malicious:
+&lt;ul&gt;
+	&lt;li&gt;https://mixpanel.com/blog/2018/02/05/update-autotrack-data-collection/&lt;/li&gt;
+&lt;/ul&gt;
+The businesses that use analytics, advertising and social media services are often leaking a lot of tracking data and handing over keys to their castles. Their management and often even web developers are so naive about how insecure the web is by default, they don't realise that users are at risk from what these third parties are allowed to do &lt;strong&gt;in the browser&lt;/strong&gt;.
+&lt;h2&gt;So why is Mozilla Evil, perhaps they're just, not the best?&lt;/h2&gt;
+Remember they're not alone, they have company in their sins, but I'm pointing them out because people fail to and because I feel they are two faced. They are likely a lesser evil than some, but still...
+
+They boast about why you should use them, because they care about privacy.
+
+They boast of features that don't work properly, like tracking protection, that &quot;mostly&quot; works: what does mostly mean? Would you use a condom that was mostly watertight?
+
+They don't inform most users. You don't know that when you visit this blog, your own computer has been used to send tracking data to various other companies... did you read my cookie policy? Do you know who's got access to this page? Are you reading what I wrote or what the analytics company JavaScript replaced it with?
+&lt;h2&gt;I'm no angel&lt;/h2&gt;
+I'm not going to tell you this website is secure or private. Maintaining a website requires an operational overhead I feel I might get wrong and put users at a higher risk (it could get cryptojacked) and I've delegated instead to wordpress.com. Maybe I should find something better, but the reason I'm not evil, is I'm not lying to you. I'm not pretending this site is something that it isn't and I'm not advising you to use this site in a manner that would put more users privacy at risk. Can I do better, yes, but then my comment about the risks you face when reading this blog wouldn't be possible.
+
+&amp;nbsp;
+
+&amp;nbsp;</content><author><name></name></author><summary type="html">Firstly, many browsers are not your friends, so this is not a Mozilla is worse than X post. So why bash Mozilla? Google get bashed, Microsoft get bashed and Apple do, but the alternative is not a saint. It boasts about privacy, but doesn't enable it for most users, it complains about tracking and then teaches web developers how to do it. It has had complaints for around a decade (since then there have been others, like 970092 ) that user privacy is being invaded because of browser features. But Mozilla are just following a standard? Mozilla staff can often play a key role in changing the web, from work on drafting standards to work on demonstrating new ideas with new features that are yet to be fully standardised. Web standards are not legal requirements and there is nothing to stop Mozilla either breaking from them to fix privacy and security or providing a default alternative release or feature flags that protect users. Fixing the design that would break everyone? So? Apple broke a lot when they stopped supporting Flash. Is Firefox incapable of leading beyond broken standards, to protect users when others have already demonstrated a precedent that it can be done? Firefox can even re-use the same security pattern adopted for SSL certificates that if you get into trouble you can opt-in to delegate to a less secure mode on a site. So why does Mozilla have to lead? Because they boast of caring about privacy.</summary></entry><entry><title type="html">We need to talk about Agile</title><link href="/2018/03/07/we-need-to-talk-about-agile.html" rel="alternate" type="text/html" title="We need to talk about Agile" /><published>2018-03-07T16:51:07+00:00</published><updated>2018-03-07T16:51:07+00:00</updated><id>/2018/03/07/we-need-to-talk-about-agile</id><content type="html" xml:base="/2018/03/07/we-need-to-talk-about-agile.html">&amp;nbsp;
+
+&quot;Agile&quot; is not a software methodology, it is an ideology... it is built on a manifesto, that in practice is often corrupted as meaning something beyond what it states. There's too many articles on what Agile does or doesn't mean, but essentially it does demand design, process, documentation and tooling; it just suggests they should be enriched with greater attention to the functions that lead to results. It was created at at time, when you could still buy software off the shelves with user manuals that were hundreds of pages long and if it didn't work, you couldn't easily update it.
+
+As an ideology it has a desired goal, which is to enable software development, but promoting ways of working that help reach functional goals. It does also tend to be a bad fit for heavily regulated environments or security conscious environments.
+
+It has very obvious missing goals, it does not address non-functional requirements like compliance, performance, reliability, consistency, accessibility, maintainability, backups, ..., the list goes on.
+
+Therefore, it is a an ideology to achieve a function, regardless of how well that function works in an ever changing and complex environment.
+
+So what is missing and what do we need to add to or replace in Agile. I'd like to introduce two very important ideologies that we should add to Agile.
+&lt;h1&gt;The Right People:  we need expertise, not just devs&lt;/h1&gt;
+Most devs can write great functional code based on business ideas for most logical and presentation requirements but they come unstuck when they need expertise in:
+&lt;ul&gt;
+	&lt;li&gt;Encryption&lt;/li&gt;
+	&lt;li&gt;Information Security architecture&lt;/li&gt;
+	&lt;li&gt;ACID /transactions&lt;/li&gt;
+	&lt;li&gt;Deadlock and concurrency&lt;/li&gt;
+	&lt;li&gt;Legal requirements - audit, auth, retention, access control, ...&lt;/li&gt;
+	&lt;li&gt;Accessibility&lt;/li&gt;
+	&lt;li&gt;...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;An example: Encryption&lt;/h2&gt;
+I do not know a single software developer who can write encryption libraries, like TLS 1.2 level encryption and I include myself. I believe there are lots of mathematicians and computer scientists who could develop individual encryption functions, but combined into a framework that is secure through the whole layer, I'm not sure many can.
+
+I have not met a single developer qualified to identify what encryption libraries are good or bad.
+
+So why do we let software developers pick encryption libraries and configure their implementation?
+
+AES 256 and RSA 4096 are surely all you need? Well, no, you'll still need to understand at least the following to use them:
+&lt;ul&gt;
+	&lt;li&gt;PRNGs&lt;/li&gt;
+	&lt;li&gt;IVs&lt;/li&gt;
+	&lt;li&gt;Sources of random&lt;/li&gt;
+	&lt;li&gt;Blacklists&lt;/li&gt;
+	&lt;li&gt;key lengths&lt;/li&gt;
+	&lt;li&gt;key randomisation&lt;/li&gt;
+	&lt;li&gt;key management&lt;/li&gt;
+	&lt;li&gt;information leakage (especially dangers of using compression, caches or any other indexed data)&lt;/li&gt;
+	&lt;li&gt;Appropriateness of re-use&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;But our team is small and only average software developers and QA?&lt;/h2&gt;
+&lt;ul&gt;
+	&lt;li&gt;Contract expertise for design, review and testing&lt;/li&gt;
+	&lt;li&gt;Delegate features to specialist teams (information security development)&lt;/li&gt;
+	&lt;li&gt;Adopt a recognised standard (NIST, OWASP, WCAG, Mozilla recommends server sidde encryption configurations, etc)&lt;/li&gt;
+	&lt;li&gt;Adopt a recognised library/application: but does the proprietary or open source library guarantee standards met to help choose adoption? You should probably avoid hashids.&lt;/li&gt;
+	&lt;li&gt;Adopt a recognised service: cloud services mean everything except your business logic can likely be bought as a service, so why not do that: then it is someone else's responsibility... just have &lt;a href=&quot;https://ico.org.uk/media/for.../cloud_computing_guidance_for_organisations.pdf&quot;&gt;fun making sure the cloud is appropriate&lt;/a&gt;.&lt;/li&gt;
+	&lt;li&gt;Alternatively, don't do it - if a small building firm can't build a skyscraper it will find something else to do - some things are not supposed to be done by small teams and startups. Is the business value really there, is it worth employing specialist help? If the business value doesn't warrant the expertise, then it probably isn't valuable enough to be worth doing.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Maintenance: it isn't just bugs&lt;/h1&gt;
+Agile typically does cater for bug fixing, but maintenance is more than that.
+&lt;ul&gt;
+	&lt;li&gt;Legal changes&lt;/li&gt;
+	&lt;li&gt;Vulnerability management&lt;/li&gt;
+	&lt;li&gt;Licences end, projects die&lt;/li&gt;
+&lt;/ul&gt;
+With GDPR arriving soon, hopefully everyone is reviewing all systems that hold, transport and ... access PII. However, it's not just GDPR that is  and has been changing, especially in more regulated environments with PCI, MIFID, GCP, Accessibility law, etc often have amendments too. Contracts with third parties typically demand levels of security that must be adhered to as well. Some of these changes are passive (you have to discover a legal change) and some are active (you are told of a contractual change) but both need to cycle into the maintenance of what would otherwise be ignored code running in production.
+
+Access is actually a really worrying problem. Many systems are setup with walls at perimeter, but not inside. So the web frontends and web api gates into the system are typically offered some lifecycle management to check for greater maintenance risks, but the other services can be just as dangerous.
+
+XXE, Remote Code Execution (reflection, SQL, etc) and even internal tooling are all often one step away from attackers and that step might not be designed to worry about the concern.
+
+The last concern is licences and discovering that your licence for proprietary software can leave you in a legal dilemma (do you shutdown to respect the licence or steal some more time, hopefully only to migrate or negotiate renewal) or that the open source project you use has died... do you take a risk and continue with unsupported and increasingly likely vulnerable software or refactor off. To do the right thing means knowing about it.
+&lt;h2&gt;This requires audit&lt;/h2&gt;
+Where is audit mentioned in the Agile manifesto?
+
+Audit is a function of all business environments have and whether it is a legally qualified audit, like an accountancy audit or regulatory audit for compliance that has a high process demand or whether it is a just a regular check, like are the toilets clean with a tickbox to fill, it happens everywhere... except so much in software development.
+
+How do you check your toilets are clean in your website in production? Sounds a bit strange, but how many of us are testing for vulnerabilities, reviewing log cleanliness, etc. We might be doing the functional parts that we know will break the application: is the server running, does the database have disk space... but beyond that too many places have security problems or even embarrassingly suffer problems like their TLS certificates expiring... when that happens, it is not a failure of the dev/ops who set it up, it is a failure of the business to have a business control around it.
+
+So we might clean the toilets with a quarterly automated penetration test, alarms when the disk levels are high and a Jira scheduled ticket (why doesn't that exist?) for renewing the TLS certs, but what about the other layers of audit.
+&lt;ul&gt;
+	&lt;li&gt;What about the full stock take? Double check everything is correct and proper annually?&lt;/li&gt;
+	&lt;li&gt;The expired goods? Third party software validation of not just CVEs but that there still is support from the third party&lt;/li&gt;
+	&lt;li&gt;The health and safety risk assessments? Still in their early days, privacy impact assessments are becoming part of software development, but many still don't do them and are they maintained on a lifecycle basis or on a first release basis? Are the requirements drawn out from them validated?&lt;/li&gt;
+&lt;/ul&gt;
+As a lifecycle event it should be driven by business controls, which means they know what to control and that requires documentation, which is fine in Agile, Agile only really demanded you didn't write thousand page usage manuals like you used to get with software in the 90s (okay, some were only 600 pages).
+
+This is the key reason why Agile Software Development fails as a project management methodology alone: the business behaviours demanded are always changing and yet the project leaves features dead in Jira: with just bug fixing idling along until a new feature is demanded.
+
+&amp;nbsp;
+
+&amp;nbsp;</content><author><name></name></author><summary type="html">&amp;nbsp;</summary></entry><entry><title type="html">NPM is lying to you and Facebook misses copyright attribution</title><link href="/2017/01/14/npm-is-lying-to-you-and-facebook-misses-copyright-attribution.html" rel="alternate" type="text/html" title="NPM is lying to you and Facebook misses copyright attribution" /><published>2017-01-14T18:24:41+00:00</published><updated>2017-01-14T18:24:41+00:00</updated><id>/2017/01/14/npm-is-lying-to-you-and-facebook-misses-copyright-attribution</id><content type="html" xml:base="/2017/01/14/npm-is-lying-to-you-and-facebook-misses-copyright-attribution.html">Update: Originally titled &quot;NPM is lying to you and Facebook is stealing copyright&quot; I've amended it out of respect to those who weren't happy with this, but this error should reflect on Facebook audit processes (due diligence) of copyright attribution, which would hopefully have caught this. Regarding concerns about attribution to Mozilla in the issue (https://github.com/facebook/react/issues/8789) I think there is a misrepresentation of CC0/dedicated to public domain in the comments: it is not the same as copyright expiry and it's important that the rights holder (which I believe is still Mozilla) is tracked by Facebook even if not attributed in published bundles. If nobody tracked that Obect.is came from Mozilla, then when the page goes, the first to copy the page can sue everyone.
+
+Firstly, copyright is complicated and getting this right is difficult and I don't believe that the npm website is trying to lie to you, but that some of the projects on there are (hopefully accidentally) doing so.
+
+No billion dollar company has the right to get this wrong and they should all be running regular audits, but even they might slip up and if they do, &lt;a href=&quot;http://www.groklaw.net/&quot;&gt;SCO vs open source&lt;/a&gt;  and &lt;a href=&quot;https://news.ycombinator.com/item?id=11722514&quot;&gt;Google's 9 lines &lt;/a&gt;were painful moments, so if they could lead by example it would be great. I do hope everyone believes individual developers should be given a little room on accuracy in this domain, we're unlikely to be lawyers, but if you do spot this kind of thing... please please please let the parties affected know in a respectful fashion that allows them to resolve it sooner rather than later, it is one thing to slip up for a short period of time and another as it gets longer: the longer it is left without resolution, the more dependent projects that might be affected too.
+
+When you look at the licences in a library in npm, you think great it is Apache, BSD, MIT, etc and I can probably use it pretty freely.
+
+When it's LGPL, GPL, AGPL or EPL it gets more complicated, but may not be impossible... it might even be okay if you wish to adopt these.
+
+Well, those licences aren't complete in npm for many libraries. Partly because of wonderful technologies like webpack that bundle your code with your dependent code, but don't, by default, facilitate creating a combined licence file in the process.
+
+npm isn't the only party getting this wrong, too many open source tools encourage you to label a project as one licence, when in truth it is more likely that your project's direct code is one licence, but when packaged it is a multi-licence project.
+
+To make matters more complicated, some source code repositories include third party code directly in their source repository (perhaps because it isn't available from the repository they choose for the project, like npm) and this results in the source code repository itself being mixed licence... how do I fit that in the Github licence option?
+
+If you publish code that is a mix of others work, including in a bundle or even as just accompanying assets, please ensure that the licences are published too. At least we don't have to make &lt;a href=&quot;http://moba.i.daimler.com/bai-cars/ba/foss/content/en/licence_agreement.html&quot;&gt;printable booklets&lt;/a&gt; to ship with physical products.
+&lt;h1&gt;&lt;a href=&quot;https://facebook.github.io/react/&quot;&gt;react&lt;/a&gt;&lt;/h1&gt;
+Facebook is a big multinational software company. They obviously know about copyright law in their legal teams.
+
+Well they've missed something... their current version of the &lt;a href=&quot;https://facebook.github.io/react/&quot;&gt;React&lt;/a&gt; website uses this wonderful JavaScript &lt;a href=&quot;https://facebook.github.io/react/js/react.js&quot;&gt;file&lt;/a&gt;  which is full of copyright statements about Facebook, but none for third party libraries.
+
+Hmm... strange, their &lt;a href=&quot;https://www.npmjs.com/package/react&quot;&gt;library&lt;/a&gt; has dependencies on &lt;a href=&quot;https://www.npmjs.com/package/object-assign&quot;&gt;object-assign&lt;/a&gt; (amongst others).
+
+Let's npm install it and see what's in the dist folder. There's a basic react.min.js file and there's an &lt;a href=&quot;https://facebook.github.io/react/docs/addons.html&quot;&gt;add-ons&lt;/a&gt; one that's also available online at the version I'm seeing locally: &lt;a href=&quot;https://unpkg.com/react@15.4.2/dist/react-with-addons.js&quot;&gt;15.4.2&lt;/a&gt;
+
+Strange, again it only has Facebook copyright in, but no third parties.
+
+Their add-ons page doesn't exactly tell you about the embedded object-assign copyright &lt;a href=&quot;https://github.com/sindresorhus/object-assign/blob/master/license&quot;&gt;licence&lt;/a&gt; which is MIT and requires that if you include object-assign in your own works you need to include their MIT licence with it so that users know that parts of the React software include object-assign.
+
+Bad Facebook, not only breaching copyright, but as developers often use them as a reference for how to build web pages, they risk setting a bad example for how to manage copyright. Their legal team should be on top this, ensuring a regular audit happens and helping to oversee it.
+
+They have a similar &lt;a href=&quot;https://github.com/facebook/draft-js/issues/944&quot;&gt;issue&lt;/a&gt; with &lt;a href=&quot;https://facebook.github.io/draft-js/&quot;&gt;Draft.js&lt;/a&gt;
+&lt;h1&gt;&lt;a href=&quot;https://github.com/kjur/jsrsasign&quot;&gt;jsrsasign&lt;/a&gt;&lt;/h1&gt;
+I spotted jsrsasign did this, but I've seen it before. Sorry to out jsrsasign, it looks like a great project... Javascript encryption enables client-side private keys and object level security instead of passwords over only network level https (mutual auth is great for your enterprises' servers, but isn't catching on for the open web).
+
+Make sure you understand encryption export law if you wish to use it, I won't pretend I know enough to offer advice and &lt;a href=&quot;https://www.thoughtworks.com/insights/blog/encryption-open-source-and-export-control&quot;&gt;ThoughtWorks&lt;/a&gt; have been good enough to offer some, but &lt;em&gt;&lt;strong&gt;you should check with a legal expert&lt;/strong&gt;&lt;/em&gt;.
+
+This has a hidden &lt;a href=&quot;https://github.com/kjur/jsrsasign/tree/master/ext&quot;&gt;ext&lt;/a&gt; folder when attempting to determine how to reference open source licences that you would need to publish with your end product, because this isn't referenced in npm. I think it can be, but unluckily jsrsasign haven't yet... hopefully they will soon.
+
+&amp;nbsp;
+
+&amp;nbsp;
+
+&amp;nbsp;
+
+&amp;nbsp;</content><author><name></name></author><summary type="html">Update: Originally titled &quot;NPM is lying to you and Facebook is stealing copyright&quot; I've amended it out of respect to those who weren't happy with this, but this error should reflect on Facebook audit processes (due diligence) of copyright attribution, which would hopefully have caught this. Regarding concerns about attribution to Mozilla in the issue (https://github.com/facebook/react/issues/8789) I think there is a misrepresentation of CC0/dedicated to public domain in the comments: it is not the same as copyright expiry and it's important that the rights holder (which I believe is still Mozilla) is tracked by Facebook even if not attributed in published bundles. If nobody tracked that Obect.is came from Mozilla, then when the page goes, the first to copy the page can sue everyone.</summary></entry><entry><title type="html">Complex Primitives</title><link href="/2016/10/30/complex-primitives.html" rel="alternate" type="text/html" title="Complex Primitives" /><published>2016-10-30T19:16:23+00:00</published><updated>2016-10-30T19:16:23+00:00</updated><id>/2016/10/30/complex-primitives</id><content type="html" xml:base="/2016/10/30/complex-primitives.html">I have a crazy idea: create a cross-platform language, no not Java: something better. Primitives are supposed to the simplest form of data in a programming language. So how hard can it be to work with them...
+&lt;h1&gt;Typical representations&lt;/h1&gt;
+&lt;ul&gt;
+	&lt;li&gt;References (pointers)&lt;/li&gt;
+	&lt;li&gt;Boolean&lt;/li&gt;
+	&lt;li&gt;Integer numbers&lt;/li&gt;
+	&lt;li&gt;Floating point numbers (binary and sometimes decimal)&lt;/li&gt;
+	&lt;li&gt;Primitive structures (array, list)&lt;/li&gt;
+	&lt;li&gt;Character(s)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Boolean is complex&lt;/h1&gt;
+In typical computing systems, everything is a 0 or  a 1, except usually nothing is.
+
+CPUs typically look at numbers at bit sets of length 8, 16, 32 or 64: not usually 1.
+
+Although most have somewhere that this doesn't hold true, either with longer primitive sizes (128/256), special floating point versions (56, 80, ...) or slightly weird 31 bitset sizes (bad IBM).
+
+The easiest way to manage boolean is to choose 0 as true or false (often false) and anything else as the opposite. However, what size of bitset do you use? If you use the defacto int then it might be different in different compilers (32bit vs 64bit).
+
+Luckily, all you need to know is the size of the bitset and the offset in memory.
+&lt;h1&gt;Integer is much more complex&lt;/h1&gt;
+So boolean is an offset in ram and a size of the bitset to use: all 0s then it's false and anything else it is true.
+
+Integers share the problem that you need to know the size of the bitset, but suffer a further problem: order and signing.
+
+The signed number part is simple: a bit is reserved at the most significant bit to be used for representing positive (zero) or negative (1: with 2s complement), but order gets complex..
+&lt;h1&gt;Bits and Byte Ordering&lt;/h1&gt;
+So what is order: well that &quot;most significant bit&quot; is the problem. Endian of bits and bytes comes into play (and they're not always the same as each other).
+
+The order of bits varies between processors and usually this problem is something that is more likely to affect you at a very low level (drivers, hardware, etc): to make it more fun most computers have more than one cpu. Your sound card, graphics card, network card, etc might all see bits a different way around: nevermind the busses.
+
+At the software level you usually find everything is the same (let me know if I've got this wrong), but here you suffer byte order differences where different protocols (network, inter-process, file  formats) can each represent things larger than a byte in different order.  This isn't too difficult to solve (https://github.com/markalanrichards/bitcoin/blob/master/src/compat/byteswap.h) you just need to remember to use it everywhere your program interfaces with the world.
+&lt;h1&gt;Floating Points&lt;/h1&gt;
+Luckily floating points are strictly described in IEEE-754, well I say luckily: except the complexities of implementing it mean that not all languages actually adhere to it: &lt;a href=&quot;https://en.wikipedia.org/wiki/Criticism_of_Java#Floating_point_arithmetic&quot;&gt;https://en.wikipedia.org/wiki/Criticism_of_Java#Floating_point_arithmetic&lt;/a&gt;
+&lt;h1&gt;Characters&lt;/h1&gt;
+Characters and Strings are terrifying.
+
+There are hundreds (maybe thousands) of character sets: in a large part because some base character sets (Latin1) have multiple versions for different languages. Not all are easy to work with (I remember something odd about Turkish EBCDIC and xml processing problems as symbols can be remapped). The simplest solution is to make everyone fit into a box and force UTF-8: then hope that nobody adds a BOM, let's hope UTF-8 never gets deprecated.
+&lt;h1&gt;References&lt;/h1&gt;
+So you have a reference to some data.... how do you reference it and what kind of data might you have to reference:
+
+The reference could be a nice compile time fixed size (like a pair of integers, I mean a pair of 64 bit integers).
+
+It might be a variable size (String of characters) holding some JSON: so maybe a block of memory.
+
+Or it might be a continuous stream (/dev/urandom)
+
+Or it might be a channel of offset data (File on disk) with parts that might no longer be available later in the day or new parts that arrive whilst reading.
+
+It's easiest to manage the fixed size case (c style) and then re-use the fixed size blocks for streams of data, but sometimes you need more complex references like File handles.
+
+So a VLQ (https://en.wikipedia.org/wiki/Variable-length_quantity) might do for the simple case, and then a VLQ that contains References to further VLQs might be usable for the rest of the use cases.
+&lt;h1&gt;Arrays and Lists&lt;/h1&gt;
+I don't think I really consider these to be primitive types
+
+Great, I don't need to write these in my language: I can borrow them? Well maybe, except when it comes to mixing primitives with polymorphic types: well maybe I can still use them I guess I can just put the type into the box as the first entry.
+&lt;h1&gt;It's all in the bus&lt;/h1&gt;
+Eventually, much of the data you use ends up moving through the buses on your system and they have different sizes and then on top of that you get fixed sized pages that move over buses, which you hope are an integer multiple of the bus size: typically the one everyone knows that isn't is the MTU (which varies between broadband, ethernet and modem systems).
+
+So when you use these complex primitives you might not want to just use the language primitives: but optimise for the bus/packet/page sizes involved. Should these be primitives? Well that might depend on your architecture and for a cross platform language I guess you should let it be a language specific optimization to curry in an outside primitive.
+&lt;h1&gt;So how to solve this for writing a new language?&lt;/h1&gt;
+Copy Scala and Groovy: use the JVM to solve this for you and give you a consistent view of the world and force everyone to map using Java data structure until later... although I'm tempted to checkout the CLR/Mono too.</content><author><name></name></author><summary type="html">I have a crazy idea: create a cross-platform language, no not Java: something better. Primitives are supposed to the simplest form of data in a programming language. So how hard can it be to work with them... Typical representations References (pointers) Boolean Integer numbers Floating point numbers (binary and sometimes decimal) Primitive structures (array, list) Character(s) Boolean is complex In typical computing systems, everything is a 0 or  a 1, except usually nothing is.</summary></entry><entry><title type="html">Keeping in Time</title><link href="/2016/09/11/keeping-in-time.html" rel="alternate" type="text/html" title="Keeping in Time" /><published>2016-09-11T15:25:21+00:00</published><updated>2016-09-11T15:25:21+00:00</updated><id>/2016/09/11/keeping-in-time</id><content type="html" xml:base="/2016/09/11/keeping-in-time.html">Now it is 15:31 on the 11-09-2016 and I'm in London.
+&lt;h2&gt;Writing and Reading dates&lt;/h2&gt;
+Always use the order or full year, month then day of month.
+&lt;ul&gt;
+	&lt;li&gt;Text ordering is now time ordered
+&lt;ul&gt;
+	&lt;li&gt;2016-06-06 is always after 2015-06-07 in text and time&lt;/li&gt;
+	&lt;li&gt;06-07-2016 is before 07-06-2015 and after 05-06-2014 in text ordering, but not in time.&lt;/li&gt;
+	&lt;li&gt;This useful in table ordering, like when listing files.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Local differences don't matter so much (Europe vs USA format)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Offset Time&lt;/h2&gt;
+The UK has British Summer Time, so that time point is 1 hour ahead of where it should be, so the time is actually 2016-09-11T15:31:00+01:00 (in ISO 8601 format).
+&lt;h2&gt;Zoned Time&lt;/h2&gt;
+If I asked you to call me at this time in 6 months, I might not appreciate a call at 2017-03-11T15:31:00+01:00 because I'm then out of Daylight Savings, so instead it's useful to capture the time zone.
+
+Like this, 2017-03-11T15:31:00 [Europe/London] where Europe/London is an official &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_tz_database_time_zones&quot;&gt;designation&lt;/a&gt; of my time zone. Except this isn't quite good enough...
+
+What if I wanted a call at 2am on 29th of October, 2017?
+
+2017-10-29T02:00:00 [Europe/London] happens twice and so to be as distinct as possible then perhaps 2017-10-29T02:00:00+00:00 [Europe/London] and 2017-10-29T02:00:00+01:00 [Europe/London] would be enough to know which is which.
+&lt;h2&gt;GPS Time is ordered?&lt;/h2&gt;
+Be wary of using GPS time. Although GPS time is an unadjusted series of seconds since a point in time, will it always be so? It's use case is for positioning and if there ever were a need, I would guess adjusting time to fix positioning would be preferred to adjusting positioning to fix time.
+&lt;h2&gt;Use TAI time when you need time order or better use incrementing ids.&lt;/h2&gt;
+You want to know about the series of events, such as, in a server log or transaction log.
+
+The problem is UTC goes back in time and as Unix time typically uses UTC, your logs will too. https://en.wikipedia.org/wiki/Unix_time
+
+But, it doesn't have to be this way: TAI time is ordered and not affected by adjustments to keep time in order with our solar cycle, so no leap seconds... that doesn't mean there aren't adjustments, but the adjustments should be such much smaller fractions of a second.
+
+But, even with TAI, that fraction of a second can still get bigger: you don't poll NTP at a rate of a fraction of a second and PC clocks fall out of sync and on VMs sometimes more than expected.
+
+So why not just use an incrementing counter? The order of log lines effectively does this, but assumes that they are written in order and kept in order, so I guess the question here is now that you aggregate your log files to central servers (Splunk, Logstash, etc) are they still in order of events or are they in order of adjustable time stamps.Summary
+&lt;ul&gt;
+	&lt;li&gt;For everyday usage use a Zoned Offset
+&lt;ul&gt;
+	&lt;li&gt;1999-12-31T23:59:59-04:00 [America/New_York]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;For scientific calculations use TAI, but how to distinguish from UTC?
+&lt;ul&gt;
+	&lt;li&gt;2017-03-11T14:31:36&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;For strict ordering of events, don't use time: but keep a reference for indexing (finding the log lines)&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Now it is 15:31 on the 11-09-2016 and I'm in London. Writing and Reading dates Always use the order or full year, month then day of month. Text ordering is now time ordered 2016-06-06 is always after 2015-06-07 in text and time 06-07-2016 is before 07-06-2015 and after 05-06-2014 in text ordering, but not in time. This useful in table ordering, like when listing files. Local differences don't matter so much (Europe vs USA format) Offset Time The UK has British Summer Time, so that time point is 1 hour ahead of where it should be, so the time is actually 2016-09-11T15:31:00+01:00 (in ISO 8601 format). Zoned Time If I asked you to call me at this time in 6 months, I might not appreciate a call at 2017-03-11T15:31:00+01:00 because I'm then out of Daylight Savings, so instead it's useful to capture the time zone.</summary></entry><entry><title type="html">ICO has no powers over webcams</title><link href="/2016/09/02/ico-has-no-powers-over-webcams.html" rel="alternate" type="text/html" title="ICO has no powers over webcams" /><published>2016-09-02T11:40:49+00:00</published><updated>2016-09-02T11:40:49+00:00</updated><id>/2016/09/02/ico-has-no-powers-over-webcams</id><content type="html" xml:base="/2016/09/02/ico-has-no-powers-over-webcams.html">&lt;p style=&quot;text-align:left;&quot; align=&quot;center&quot;&gt;&lt;a href=&quot;https://ico.org.uk/media/1043287/ico-letter-to-webcam-manufacturers.pdf&quot;&gt;ICO published a letter to Webcam manufacturers...&lt;/a&gt; well you don't have to pay much attention to it if you are one.&lt;/p&gt;
+&lt;p style=&quot;text-align:left;&quot; align=&quot;center&quot;&gt;&lt;a href=&quot;https://www.eff.org/deeplinks/2015/11/superfish-20-now-dell-breaking-https&quot;&gt;Dell decided to break https encryption on their laptops by installed a vulnerable root certificate. &lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot;text-align:left;&quot; align=&quot;center&quot;&gt;If you run a business and store personal data, you must go through heaps of hoops to ensure you are compliant with data protection law. But the manufacturer of the server, network equipment and laptops you have to use has no requirements: so they can be as insecure as they like and you pick up the bill when the ICO chases down their breach.&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;&lt;b&gt;Case Reference Number RFA0606701&lt;/b&gt;&lt;/p&gt;
+I write in relation to your concerns about Dell’s new equipment security fault, about which my colleague has previously responded to you.
+
+The DPA works by placing obligations on organisations that hold personal information. The DPA does not however place any obligations on the manufacturers of equipment that may be used for storing personal information.
+
+The security requirement of the DPA (the seventh data protection principle) requires an organisation holding personal data to have adequate technical and organisational measures in place to protect the personal data (taking account of the nature of the information being held, the availability of technology, and the cost of implementing those measures).
+
+As such, an organisation that has purchased Dell equipment subject to the fault for the storage of personal data may be contravening the DPA if they have failed to keep personal data secure as a result of their use of insecure equipment for the storage of personal data.
+
+Dell is not contravening any requirements of the DPA by selling insecure equipment. The DPA does not, in any way, require suppliers of equipment to ensure their products are secure. The obligations arising from the DPA are for organisations using the equipment for the storage of personal data.
+
+Because our powers are specific to the DPA there is therefore no punitive or other action we can take against Dell over its failure to sell secure computer equipment.</content><author><name></name></author><summary type="html">ICO published a letter to Webcam manufacturers... well you don't have to pay much attention to it if you are one. Dell decided to break https encryption on their laptops by installed a vulnerable root certificate. If you run a business and store personal data, you must go through heaps of hoops to ensure you are compliant with data protection law. But the manufacturer of the server, network equipment and laptops you have to use has no requirements: so they can be as insecure as they like and you pick up the bill when the ICO chases down their breach. Case Reference Number RFA0606701 I write in relation to your concerns about Dell’s new equipment security fault, about which my colleague has previously responded to you.</summary></entry><entry><title type="html">CompletableFuture: does it block?</title><link href="/2016/06/22/completablefuture-does-it-block.html" rel="alternate" type="text/html" title="CompletableFuture: does it block?" /><published>2016-06-22T01:03:01+00:00</published><updated>2016-06-22T01:03:01+00:00</updated><id>/2016/06/22/completablefuture-does-it-block-</id><content type="html" xml:base="/2016/06/22/completablefuture-does-it-block.html">&lt;h2&gt;What happens with this (full code below)?&lt;/h2&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt; &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;obviouslySecondFirst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;allOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenAccept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenAccept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;concurrentLinkedQueue:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;assertThat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copyOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;equalTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)));&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;em&gt;This will randomly swap between returning [&quot;second&quot;,&quot;first&quot;] and [&quot;first&quot;,&quot;second&quot;] and therefore, randomly block second&lt;/em&gt;
+
+&amp;nbsp;
+&lt;h2&gt;Repeat it...&lt;/h2&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt; &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;obviouslySecondFirstWithWaitBeforeCall&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CompletableFuture&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;suppliedFirst&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;supplyAsyncFirst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;allOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;suppliedFirst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenAccept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;supplyAsyncSecond&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenAccept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;concurrentLinkedQueue:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;assertThat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copyOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;equalTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)));&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;em&gt;This is a bad design!&lt;/em&gt;
+
+&amp;nbsp;
+
+If the methods were split between two classes (AsyncCompletableFuture and SyncCompletableFuture) then I might forgive this as I could easily code review the differences, but they're all thrown in the same one.
+
+To make matters worse, some methods don't explicitely have an async option.
+
+So there's a method exceptionally(), but no exceptionallyAsync(), will that block when you do supplyAsync(()-&amp;gt;x).exceptionally(t-&amp;gt;blockingLogging(t))?
+
+EDIT: 22/06/16:10am
+&lt;h2&gt;Confusing chaining&lt;/h2&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt; &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;secondsecondShouldBeFirstFirst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;allOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;assertThat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copyOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;equalTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)));&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;em&gt;This will randomly block and randomly not: sometimes returning [first,first,second,second] and sometimes [second,first,second,first]&lt;/em&gt;
+&lt;h2&gt;The code...&lt;/h2&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.junit.Test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.concurrent.CompletableFuture&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.concurrent.ConcurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.function.Function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.function.Supplier&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;google&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;common&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;collect&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ImmutableList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;copyOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;google&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;common&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;collect&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ImmutableList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;util&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;concurrent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;CompletableFuture&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;allOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;util&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;concurrent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;CompletableFuture&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;util&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;concurrent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;TimeUnit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SECONDS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hamcrest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;CoreMatchers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equalTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;junit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Assert&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertThat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SupplyItAsyncMaybe&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seconds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;SECONDS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seconds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;e1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;quot&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;quot&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;quot&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;quot&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ConcurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ConcurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;();&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Supplier&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;supplyFirstAfterDelay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seconds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;initalValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seconds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;initalValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ConcurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seconds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seconds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;secondShouldBeFirst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;allOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;concurrentLinkedQueue:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;assertThat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copyOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;equalTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)));&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;secondsecondShouldBeFirstFirst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;allOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;assertThat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copyOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;equalTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)));&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;secondsecondShouldBeFirstFirstAlways&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;CompletableFuture&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stringCompletableFuture&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;allOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;stringCompletableFuture&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;assertThat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copyOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;equalTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)));&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;secondsecondShouldBeFirstFirstDelayedFutureSupplier&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;allOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;supplyFirstAfterDelay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;supplyFirstAfterDelay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;assertThat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copyOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;equalTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)));&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;secondIsNeverFirst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CompletableFuture&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;suppliedFirst&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;allOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;suppliedFirst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenAccept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;concurrentLinkedQueue:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;assertThat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copyOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;equalTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)));&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;secondIsNeverFirstWhenDelayIsLonger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CompletableFuture&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;suppliedFirst&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;supplyFirstAfterDelay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;allOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;suppliedFirst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenAccept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;concurrentLinkedQueue:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;assertThat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copyOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;equalTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)));&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asyncSimple&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;allOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenAcceptAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;concurrentLinkedQueue:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;assertThat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copyOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;equalTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)));&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asyncWithADelay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CompletableFuture&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;suppliedFirst&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;allOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;suppliedFirst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenAcceptAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;concurrentLinkedQueue:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;assertThat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copyOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;equalTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)));&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asyncWithMultipleDelays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;CompletableFuture&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stringCompletableFuture&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;supplyFirstAfterDelay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;allOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;stringCompletableFuture&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addDelayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;supplyAsync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenApply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;concurrentLinkedQueue:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;assertThat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copyOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrentLinkedQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;equalTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)));&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><summary type="html">What happens with this (full code below)? @Test public void obviouslySecondFirst() { allOf( supplyAsync(() -&amp;amp;amp;gt; first).thenAccept(addDelayed(concurrentLinkedQueue, delay)), supplyAsync(() -&amp;amp;amp;gt; second).thenAccept(concurrentLinkedQueue::add) ).join(); assertThat(copyOf(concurrentLinkedQueue), equalTo(of(second, first))); }</summary></entry></feed>

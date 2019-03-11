@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>CompletableFuture: does it block? | Mark Alan Richards</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="CompletableFuture: does it block?" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="What happens with this (full code below)? @Test public void obviouslySecondFirst() { allOf( supplyAsync(() -&amp;amp;gt; first).thenAccept(addDelayed(concurrentLinkedQueue, delay)), supplyAsync(() -&amp;amp;gt; second).thenAccept(concurrentLinkedQueue::add) ).join(); assertThat(copyOf(concurrentLinkedQueue), equalTo(of(second, first))); }" />
+<meta property="og:description" content="What happens with this (full code below)? @Test public void obviouslySecondFirst() { allOf( supplyAsync(() -&amp;amp;gt; first).thenAccept(addDelayed(concurrentLinkedQueue, delay)), supplyAsync(() -&amp;amp;gt; second).thenAccept(concurrentLinkedQueue::add) ).join(); assertThat(copyOf(concurrentLinkedQueue), equalTo(of(second, first))); }" />
+<link rel="canonical" href="/2016/06/22/completablefuture-does-it-block.html" />
+<meta property="og:url" content="/2016/06/22/completablefuture-does-it-block.html" />
+<meta property="og:site_name" content="Mark Alan Richards" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-06-22T01:03:01+00:00" />
+<script type="application/ld+json">
+{"description":"What happens with this (full code below)? @Test public void obviouslySecondFirst() { allOf( supplyAsync(() -&amp;amp;gt; first).thenAccept(addDelayed(concurrentLinkedQueue, delay)), supplyAsync(() -&amp;amp;gt; second).thenAccept(concurrentLinkedQueue::add) ).join(); assertThat(copyOf(concurrentLinkedQueue), equalTo(of(second, first))); }","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"/2016/06/22/completablefuture-does-it-block.html"},"url":"/2016/06/22/completablefuture-does-it-block.html","headline":"CompletableFuture: does it block?","dateModified":"2016-06-22T01:03:01+00:00","datePublished":"2016-06-22T01:03:01+00:00","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Mark Alan Richards" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Mark Alan Richards</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">CompletableFuture: does it block?</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2016-06-22T01:03:01+00:00" itemprop="datePublished">Jun 22, 2016
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2>What happens with this (full code below)?</h2>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">obviouslySecondFirst</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">allOf</span><span class="o">(</span>
+                <span class="n">supplyAsync</span><span class="o">(()</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">first</span><span class="o">).</span><span class="na">thenAccept</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span><span class="o">)),</span>
+                <span class="n">supplyAsync</span><span class="o">(()</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">second</span><span class="o">).</span><span class="na">thenAccept</span><span class="o">(</span><span class="nl">concurrentLinkedQueue:</span><span class="o">:</span><span class="n">add</span><span class="o">)</span>
+        <span class="o">).</span><span class="na">join</span><span class="o">();</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">copyOf</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">),</span> <span class="n">equalTo</span><span class="o">(</span><span class="n">of</span><span class="o">(</span><span class="n">second</span><span class="o">,</span> <span class="n">first</span><span class="o">)));</span>
+    <span class="o">}</span></code></pre></figure>
+
+<em>This will randomly swap between returning ["second","first"] and ["first","second"] and therefore, randomly block second</em>
+
+&nbsp;
+<h2>Repeat it...</h2>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">obviouslySecondFirstWithWaitBeforeCall</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">CompletableFuture</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">lt</span><span class="o">;</span><span class="n">String</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">suppliedFirst</span> <span class="o">=</span> <span class="n">supplyAsyncFirst</span><span class="o">();</span>
+        <span class="n">delay</span><span class="o">(</span><span class="n">delay</span><span class="o">);</span>
+        <span class="n">allOf</span><span class="o">(</span>
+                <span class="n">suppliedFirst</span><span class="o">.</span><span class="na">thenAccept</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span><span class="o">)),</span>
+                <span class="n">supplyAsyncSecond</span><span class="o">().</span><span class="na">thenAccept</span><span class="o">(</span><span class="nl">concurrentLinkedQueue:</span><span class="o">:</span><span class="n">add</span><span class="o">)</span>
+        <span class="o">).</span><span class="na">join</span><span class="o">();</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">copyOf</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">),</span> <span class="n">equalTo</span><span class="o">(</span><span class="n">of</span><span class="o">(</span><span class="n">second</span><span class="o">,</span> <span class="n">first</span><span class="o">)));</span>
+    <span class="o">}</span></code></pre></figure>
+
+<em>This is a bad design!</em>
+
+&nbsp;
+
+If the methods were split between two classes (AsyncCompletableFuture and SyncCompletableFuture) then I might forgive this as I could easily code review the differences, but they're all thrown in the same one.
+
+To make matters worse, some methods don't explicitely have an async option.
+
+So there's a method exceptionally(), but no exceptionallyAsync(), will that block when you do supplyAsync(()-&gt;x).exceptionally(t-&gt;blockingLogging(t))?
+
+EDIT: 22/06/16:10am
+<h2>Confusing chaining</h2>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">secondsecondShouldBeFirstFirst</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">allOf</span><span class="o">(</span>
+                <span class="n">supplyAsync</span><span class="o">(()</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">first</span><span class="o">).</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)).</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)),</span>
+                <span class="n">supplyAsync</span><span class="o">(()</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">second</span><span class="o">).</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span><span class="o">)).</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span> <span class="o">*</span> <span class="mi">2</span><span class="o">))</span>
+        <span class="o">).</span><span class="na">join</span><span class="o">();</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">copyOf</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">),</span> <span class="n">equalTo</span><span class="o">(</span><span class="n">of</span><span class="o">(</span><span class="n">second</span><span class="o">,</span> <span class="n">second</span><span class="o">,</span> <span class="n">first</span><span class="o">,</span> <span class="n">first</span><span class="o">)));</span>
+    <span class="o">}</span></code></pre></figure>
+
+<em>This will randomly block and randomly not: sometimes returning [first,first,second,second] and sometimes [second,first,second,first]</em>
+<h2>The code...</h2>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.CompletableFuture</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.ConcurrentLinkedQueue</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.function.Function</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.function.Supplier</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">common</span><span class="o">.</span><span class="na">collect</span><span class="o">.</span><span class="na">ImmutableList</span><span class="o">.</span><span class="na">copyOf</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">common</span><span class="o">.</span><span class="na">collect</span><span class="o">.</span><span class="na">ImmutableList</span><span class="o">.</span><span class="na">of</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">concurrent</span><span class="o">.</span><span class="na">CompletableFuture</span><span class="o">.</span><span class="na">allOf</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">concurrent</span><span class="o">.</span><span class="na">CompletableFuture</span><span class="o">.</span><span class="na">supplyAsync</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">concurrent</span><span class="o">.</span><span class="na">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">hamcrest</span><span class="o">.</span><span class="na">CoreMatchers</span><span class="o">.</span><span class="na">equalTo</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">junit</span><span class="o">.</span><span class="na">Assert</span><span class="o">.</span><span class="na">assertThat</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SupplyItAsyncMaybe</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">delay</span><span class="o">(</span><span class="kt">int</span> <span class="n">seconds</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">SECONDS</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">seconds</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e1</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="kd">final</span> <span class="n">String</span> <span class="n">first</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">quot</span><span class="o">;</span><span class="n">first</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">quot</span><span class="o">;,</span> <span class="n">second</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">quot</span><span class="o">;</span><span class="n">second</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">quot</span><span class="o">;;</span>
+    <span class="kd">final</span> <span class="kt">int</span> <span class="n">delay</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+    <span class="kd">final</span> <span class="n">ConcurrentLinkedQueue</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">lt</span><span class="o">;</span><span class="n">String</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">concurrentLinkedQueue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ConcurrentLinkedQueue</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">lt</span><span class="o">;&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;();</span>
+    <span class="kd">private</span> <span class="n">Supplier</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">lt</span><span class="o">;</span><span class="n">String</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">supplyFirstAfterDelay</span><span class="o">(</span><span class="kt">int</span> <span class="n">seconds</span><span class="o">,</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">initalValue</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">()</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="o">{</span>
+            <span class="n">delay</span><span class="o">(</span><span class="n">seconds</span><span class="o">);</span>
+            <span class="k">return</span> <span class="n">initalValue</span><span class="o">;</span>
+        <span class="o">};</span>
+    <span class="o">}</span>
+    <span class="kd">private</span> <span class="n">Function</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">lt</span><span class="o">;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">addDelayed</span><span class="o">(</span><span class="kd">final</span> <span class="n">ConcurrentLinkedQueue</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">lt</span><span class="o">;</span><span class="n">String</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">seconds</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">e</span><span class="o">)</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="o">{</span>
+            <span class="n">delay</span><span class="o">(</span><span class="n">seconds</span><span class="o">);</span>
+            <span class="n">concurrentLinkedQueue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+            <span class="k">return</span> <span class="n">e</span><span class="o">;</span>
+        <span class="o">};</span>
+    <span class="o">}</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">secondShouldBeFirst</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">allOf</span><span class="o">(</span>
+                <span class="n">supplyAsync</span><span class="o">(()</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">first</span><span class="o">).</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span><span class="o">)),</span>
+                <span class="n">supplyAsync</span><span class="o">(()</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">second</span><span class="o">).</span><span class="na">thenApply</span><span class="o">(</span><span class="nl">concurrentLinkedQueue:</span><span class="o">:</span><span class="n">add</span><span class="o">)</span>
+        <span class="o">).</span><span class="na">join</span><span class="o">();</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">copyOf</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">),</span> <span class="n">equalTo</span><span class="o">(</span><span class="n">of</span><span class="o">(</span><span class="n">second</span><span class="o">,</span> <span class="n">first</span><span class="o">)));</span>
+    <span class="o">}</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">secondsecondShouldBeFirstFirst</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">allOf</span><span class="o">(</span>
+                <span class="n">supplyAsync</span><span class="o">(()</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">first</span><span class="o">).</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)).</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)),</span>
+                <span class="n">supplyAsync</span><span class="o">(()</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">second</span><span class="o">).</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span><span class="o">)).</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span> <span class="o">*</span> <span class="mi">2</span><span class="o">))</span>
+        <span class="o">).</span><span class="na">join</span><span class="o">();</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">copyOf</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">),</span> <span class="n">equalTo</span><span class="o">(</span><span class="n">of</span><span class="o">(</span><span class="n">second</span><span class="o">,</span> <span class="n">second</span><span class="o">,</span> <span class="n">first</span><span class="o">,</span> <span class="n">first</span><span class="o">)));</span>
+    <span class="o">}</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">secondsecondShouldBeFirstFirstAlways</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">CompletableFuture</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">lt</span><span class="o">;</span><span class="n">String</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">stringCompletableFuture</span> <span class="o">=</span> <span class="n">supplyAsync</span><span class="o">(()</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">first</span><span class="o">);</span>
+        <span class="n">delay</span><span class="o">(</span><span class="n">delay</span><span class="o">);</span>
+        <span class="n">allOf</span><span class="o">(</span>
+                <span class="n">stringCompletableFuture</span><span class="o">.</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)).</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)),</span>
+                <span class="n">supplyAsync</span><span class="o">(()</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">second</span><span class="o">).</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span><span class="o">)).</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span> <span class="o">*</span> <span class="mi">2</span><span class="o">))</span>
+        <span class="o">).</span><span class="na">join</span><span class="o">();</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">copyOf</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">),</span> <span class="n">equalTo</span><span class="o">(</span><span class="n">of</span><span class="o">(</span><span class="n">second</span><span class="o">,</span> <span class="n">second</span><span class="o">,</span> <span class="n">first</span><span class="o">,</span> <span class="n">first</span><span class="o">)));</span>
+    <span class="o">}</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">secondsecondShouldBeFirstFirstDelayedFutureSupplier</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">allOf</span><span class="o">(</span>
+                <span class="n">supplyAsync</span><span class="o">(</span><span class="n">supplyFirstAfterDelay</span><span class="o">(</span><span class="n">delay</span><span class="o">,</span> <span class="n">first</span><span class="o">)).</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)).</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)),</span>
+                <span class="n">supplyAsync</span><span class="o">(</span><span class="n">supplyFirstAfterDelay</span><span class="o">(</span><span class="n">delay</span><span class="o">,</span> <span class="n">second</span><span class="o">)).</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span><span class="o">)).</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span> <span class="o">*</span> <span class="mi">2</span><span class="o">))</span>
+        <span class="o">).</span><span class="na">join</span><span class="o">();</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">copyOf</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">),</span> <span class="n">equalTo</span><span class="o">(</span><span class="n">of</span><span class="o">(</span><span class="n">second</span><span class="o">,</span> <span class="n">second</span><span class="o">,</span> <span class="n">first</span><span class="o">,</span> <span class="n">first</span><span class="o">)));</span>
+    <span class="o">}</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">secondIsNeverFirst</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">CompletableFuture</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">lt</span><span class="o">;</span><span class="n">String</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">suppliedFirst</span> <span class="o">=</span> <span class="n">supplyAsync</span><span class="o">(()</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">first</span><span class="o">);</span>
+        <span class="n">delay</span><span class="o">(</span><span class="n">delay</span><span class="o">);</span>
+        <span class="n">allOf</span><span class="o">(</span>
+                <span class="n">suppliedFirst</span><span class="o">.</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span><span class="o">)),</span>
+                <span class="n">supplyAsync</span><span class="o">(()</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">second</span><span class="o">).</span><span class="na">thenAccept</span><span class="o">(</span><span class="nl">concurrentLinkedQueue:</span><span class="o">:</span><span class="n">add</span><span class="o">)</span>
+        <span class="o">).</span><span class="na">join</span><span class="o">();</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">copyOf</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">),</span> <span class="n">equalTo</span><span class="o">(</span><span class="n">of</span><span class="o">(</span><span class="n">second</span><span class="o">,</span> <span class="n">first</span><span class="o">)));</span>
+    <span class="o">}</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">secondIsNeverFirstWhenDelayIsLonger</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">CompletableFuture</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">lt</span><span class="o">;</span><span class="n">String</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">suppliedFirst</span> <span class="o">=</span> <span class="n">supplyAsync</span><span class="o">(</span><span class="n">supplyFirstAfterDelay</span><span class="o">(</span><span class="n">delay</span><span class="o">,</span> <span class="n">first</span><span class="o">));</span>
+        <span class="n">delay</span><span class="o">(</span><span class="n">delay</span> <span class="o">*</span> <span class="mi">2</span><span class="o">);</span>
+        <span class="n">allOf</span><span class="o">(</span>
+                <span class="n">suppliedFirst</span><span class="o">.</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span><span class="o">)),</span>
+                <span class="n">supplyAsync</span><span class="o">(()</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">second</span><span class="o">).</span><span class="na">thenAccept</span><span class="o">(</span><span class="nl">concurrentLinkedQueue:</span><span class="o">:</span><span class="n">add</span><span class="o">)</span>
+        <span class="o">).</span><span class="na">join</span><span class="o">();</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">copyOf</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">),</span> <span class="n">equalTo</span><span class="o">(</span><span class="n">of</span><span class="o">(</span><span class="n">second</span><span class="o">,</span> <span class="n">first</span><span class="o">)));</span>
+    <span class="o">}</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">asyncSimple</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">allOf</span><span class="o">(</span>
+                <span class="n">supplyAsync</span><span class="o">(()</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">first</span><span class="o">).</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span><span class="o">)),</span>
+                <span class="n">supplyAsync</span><span class="o">(()</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">second</span><span class="o">).</span><span class="na">thenAcceptAsync</span><span class="o">(</span><span class="nl">concurrentLinkedQueue:</span><span class="o">:</span><span class="n">add</span><span class="o">)</span>
+        <span class="o">).</span><span class="na">join</span><span class="o">();</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">copyOf</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">),</span> <span class="n">equalTo</span><span class="o">(</span><span class="n">of</span><span class="o">(</span><span class="n">second</span><span class="o">,</span> <span class="n">first</span><span class="o">)));</span>
+    <span class="o">}</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">asyncWithADelay</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">CompletableFuture</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">lt</span><span class="o">;</span><span class="n">String</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">suppliedFirst</span> <span class="o">=</span> <span class="n">supplyAsync</span><span class="o">(()</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">first</span><span class="o">);</span>
+        <span class="n">delay</span><span class="o">(</span><span class="n">delay</span> <span class="o">*</span> <span class="mi">2</span><span class="o">);</span>
+        <span class="n">allOf</span><span class="o">(</span>
+                <span class="n">suppliedFirst</span><span class="o">.</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span><span class="o">)),</span>
+                <span class="n">supplyAsync</span><span class="o">(()</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">second</span><span class="o">).</span><span class="na">thenAcceptAsync</span><span class="o">(</span><span class="nl">concurrentLinkedQueue:</span><span class="o">:</span><span class="n">add</span><span class="o">)</span>
+        <span class="o">).</span><span class="na">join</span><span class="o">();</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">copyOf</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">),</span> <span class="n">equalTo</span><span class="o">(</span><span class="n">of</span><span class="o">(</span><span class="n">second</span><span class="o">,</span> <span class="n">first</span><span class="o">)));</span>
+    <span class="o">}</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">asyncWithMultipleDelays</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">CompletableFuture</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">lt</span><span class="o">;</span><span class="n">String</span><span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">stringCompletableFuture</span> <span class="o">=</span> <span class="n">supplyAsync</span><span class="o">(</span><span class="n">supplyFirstAfterDelay</span><span class="o">(</span><span class="n">delay</span><span class="o">,</span> <span class="n">first</span><span class="o">));</span>
+        <span class="n">delay</span><span class="o">(</span><span class="n">delay</span> <span class="o">*</span> <span class="mi">2</span><span class="o">);</span>
+        <span class="n">allOf</span><span class="o">(</span>
+                <span class="n">stringCompletableFuture</span><span class="o">.</span><span class="na">thenApply</span><span class="o">(</span><span class="n">addDelayed</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">,</span> <span class="n">delay</span><span class="o">)),</span>
+                <span class="n">supplyAsync</span><span class="o">(()</span> <span class="o">-&amp;</span><span class="n">amp</span><span class="o">;</span><span class="n">gt</span><span class="o">;</span> <span class="n">second</span><span class="o">).</span><span class="na">thenApply</span><span class="o">(</span><span class="nl">concurrentLinkedQueue:</span><span class="o">:</span><span class="n">add</span><span class="o">)).</span><span class="na">join</span><span class="o">();</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">copyOf</span><span class="o">(</span><span class="n">concurrentLinkedQueue</span><span class="o">),</span> <span class="n">equalTo</span><span class="o">(</span><span class="n">of</span><span class="o">(</span><span class="n">second</span><span class="o">,</span> <span class="n">first</span><span class="o">)));</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+  </div><a class="u-url" href="/2016/06/22/completablefuture-does-it-block.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Mark Alan Richards</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Mark Alan Richards</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/markalanrichards"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">markalanrichards</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

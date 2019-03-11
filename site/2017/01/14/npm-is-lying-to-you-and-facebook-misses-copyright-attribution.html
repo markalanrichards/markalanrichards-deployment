@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>NPM is lying to you and Facebook misses copyright attribution | Mark Alan Richards</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="NPM is lying to you and Facebook misses copyright attribution" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Update: Originally titled “NPM is lying to you and Facebook is stealing copyright” I’ve amended it out of respect to those who weren’t happy with this, but this error should reflect on Facebook audit processes (due diligence) of copyright attribution, which would hopefully have caught this. Regarding concerns about attribution to Mozilla in the issue (https://github.com/facebook/react/issues/8789) I think there is a misrepresentation of CC0/dedicated to public domain in the comments: it is not the same as copyright expiry and it’s important that the rights holder (which I believe is still Mozilla) is tracked by Facebook even if not attributed in published bundles. If nobody tracked that Obect.is came from Mozilla, then when the page goes, the first to copy the page can sue everyone." />
+<meta property="og:description" content="Update: Originally titled “NPM is lying to you and Facebook is stealing copyright” I’ve amended it out of respect to those who weren’t happy with this, but this error should reflect on Facebook audit processes (due diligence) of copyright attribution, which would hopefully have caught this. Regarding concerns about attribution to Mozilla in the issue (https://github.com/facebook/react/issues/8789) I think there is a misrepresentation of CC0/dedicated to public domain in the comments: it is not the same as copyright expiry and it’s important that the rights holder (which I believe is still Mozilla) is tracked by Facebook even if not attributed in published bundles. If nobody tracked that Obect.is came from Mozilla, then when the page goes, the first to copy the page can sue everyone." />
+<link rel="canonical" href="/2017/01/14/npm-is-lying-to-you-and-facebook-misses-copyright-attribution.html" />
+<meta property="og:url" content="/2017/01/14/npm-is-lying-to-you-and-facebook-misses-copyright-attribution.html" />
+<meta property="og:site_name" content="Mark Alan Richards" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-01-14T18:24:41+00:00" />
+<script type="application/ld+json">
+{"description":"Update: Originally titled “NPM is lying to you and Facebook is stealing copyright” I’ve amended it out of respect to those who weren’t happy with this, but this error should reflect on Facebook audit processes (due diligence) of copyright attribution, which would hopefully have caught this. Regarding concerns about attribution to Mozilla in the issue (https://github.com/facebook/react/issues/8789) I think there is a misrepresentation of CC0/dedicated to public domain in the comments: it is not the same as copyright expiry and it’s important that the rights holder (which I believe is still Mozilla) is tracked by Facebook even if not attributed in published bundles. If nobody tracked that Obect.is came from Mozilla, then when the page goes, the first to copy the page can sue everyone.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"/2017/01/14/npm-is-lying-to-you-and-facebook-misses-copyright-attribution.html"},"url":"/2017/01/14/npm-is-lying-to-you-and-facebook-misses-copyright-attribution.html","headline":"NPM is lying to you and Facebook misses copyright attribution","dateModified":"2017-01-14T18:24:41+00:00","datePublished":"2017-01-14T18:24:41+00:00","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Mark Alan Richards" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Mark Alan Richards</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">NPM is lying to you and Facebook misses copyright attribution</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-01-14T18:24:41+00:00" itemprop="datePublished">Jan 14, 2017
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    Update: Originally titled "NPM is lying to you and Facebook is stealing copyright" I've amended it out of respect to those who weren't happy with this, but this error should reflect on Facebook audit processes (due diligence) of copyright attribution, which would hopefully have caught this. Regarding concerns about attribution to Mozilla in the issue (https://github.com/facebook/react/issues/8789) I think there is a misrepresentation of CC0/dedicated to public domain in the comments: it is not the same as copyright expiry and it's important that the rights holder (which I believe is still Mozilla) is tracked by Facebook even if not attributed in published bundles. If nobody tracked that Obect.is came from Mozilla, then when the page goes, the first to copy the page can sue everyone.
+
+Firstly, copyright is complicated and getting this right is difficult and I don't believe that the npm website is trying to lie to you, but that some of the projects on there are (hopefully accidentally) doing so.
+
+No billion dollar company has the right to get this wrong and they should all be running regular audits, but even they might slip up and if they do, <a href="http://www.groklaw.net/">SCO vs open source</a>  and <a href="https://news.ycombinator.com/item?id=11722514">Google's 9 lines </a>were painful moments, so if they could lead by example it would be great. I do hope everyone believes individual developers should be given a little room on accuracy in this domain, we're unlikely to be lawyers, but if you do spot this kind of thing... please please please let the parties affected know in a respectful fashion that allows them to resolve it sooner rather than later, it is one thing to slip up for a short period of time and another as it gets longer: the longer it is left without resolution, the more dependent projects that might be affected too.
+
+When you look at the licences in a library in npm, you think great it is Apache, BSD, MIT, etc and I can probably use it pretty freely.
+
+When it's LGPL, GPL, AGPL or EPL it gets more complicated, but may not be impossible... it might even be okay if you wish to adopt these.
+
+Well, those licences aren't complete in npm for many libraries. Partly because of wonderful technologies like webpack that bundle your code with your dependent code, but don't, by default, facilitate creating a combined licence file in the process.
+
+npm isn't the only party getting this wrong, too many open source tools encourage you to label a project as one licence, when in truth it is more likely that your project's direct code is one licence, but when packaged it is a multi-licence project.
+
+To make matters more complicated, some source code repositories include third party code directly in their source repository (perhaps because it isn't available from the repository they choose for the project, like npm) and this results in the source code repository itself being mixed licence... how do I fit that in the Github licence option?
+
+If you publish code that is a mix of others work, including in a bundle or even as just accompanying assets, please ensure that the licences are published too. At least we don't have to make <a href="http://moba.i.daimler.com/bai-cars/ba/foss/content/en/licence_agreement.html">printable booklets</a> to ship with physical products.
+<h1><a href="https://facebook.github.io/react/">react</a></h1>
+Facebook is a big multinational software company. They obviously know about copyright law in their legal teams.
+
+Well they've missed something... their current version of the <a href="https://facebook.github.io/react/">React</a> website uses this wonderful JavaScript <a href="https://facebook.github.io/react/js/react.js">file</a>  which is full of copyright statements about Facebook, but none for third party libraries.
+
+Hmm... strange, their <a href="https://www.npmjs.com/package/react">library</a> has dependencies on <a href="https://www.npmjs.com/package/object-assign">object-assign</a> (amongst others).
+
+Let's npm install it and see what's in the dist folder. There's a basic react.min.js file and there's an <a href="https://facebook.github.io/react/docs/addons.html">add-ons</a> one that's also available online at the version I'm seeing locally: <a href="https://unpkg.com/react@15.4.2/dist/react-with-addons.js">15.4.2</a>
+
+Strange, again it only has Facebook copyright in, but no third parties.
+
+Their add-ons page doesn't exactly tell you about the embedded object-assign copyright <a href="https://github.com/sindresorhus/object-assign/blob/master/license">licence</a> which is MIT and requires that if you include object-assign in your own works you need to include their MIT licence with it so that users know that parts of the React software include object-assign.
+
+Bad Facebook, not only breaching copyright, but as developers often use them as a reference for how to build web pages, they risk setting a bad example for how to manage copyright. Their legal team should be on top this, ensuring a regular audit happens and helping to oversee it.
+
+They have a similar <a href="https://github.com/facebook/draft-js/issues/944">issue</a> with <a href="https://facebook.github.io/draft-js/">Draft.js</a>
+<h1><a href="https://github.com/kjur/jsrsasign">jsrsasign</a></h1>
+I spotted jsrsasign did this, but I've seen it before. Sorry to out jsrsasign, it looks like a great project... Javascript encryption enables client-side private keys and object level security instead of passwords over only network level https (mutual auth is great for your enterprises' servers, but isn't catching on for the open web).
+
+Make sure you understand encryption export law if you wish to use it, I won't pretend I know enough to offer advice and <a href="https://www.thoughtworks.com/insights/blog/encryption-open-source-and-export-control">ThoughtWorks</a> have been good enough to offer some, but <em><strong>you should check with a legal expert</strong></em>.
+
+This has a hidden <a href="https://github.com/kjur/jsrsasign/tree/master/ext">ext</a> folder when attempting to determine how to reference open source licences that you would need to publish with your end product, because this isn't referenced in npm. I think it can be, but unluckily jsrsasign haven't yet... hopefully they will soon.
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+  </div><a class="u-url" href="/2017/01/14/npm-is-lying-to-you-and-facebook-misses-copyright-attribution.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Mark Alan Richards</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Mark Alan Richards</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/markalanrichards"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">markalanrichards</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

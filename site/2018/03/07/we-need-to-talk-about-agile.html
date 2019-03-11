@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>We need to talk about Agile | Mark Alan Richards</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="We need to talk about Agile" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content=" " />
+<meta property="og:description" content=" " />
+<link rel="canonical" href="/2018/03/07/we-need-to-talk-about-agile.html" />
+<meta property="og:url" content="/2018/03/07/we-need-to-talk-about-agile.html" />
+<meta property="og:site_name" content="Mark Alan Richards" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-03-07T16:51:07+00:00" />
+<script type="application/ld+json">
+{"description":" ","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"/2018/03/07/we-need-to-talk-about-agile.html"},"url":"/2018/03/07/we-need-to-talk-about-agile.html","headline":"We need to talk about Agile","dateModified":"2018-03-07T16:51:07+00:00","datePublished":"2018-03-07T16:51:07+00:00","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Mark Alan Richards" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Mark Alan Richards</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">We need to talk about Agile</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-03-07T16:51:07+00:00" itemprop="datePublished">Mar 7, 2018
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    &nbsp;
+
+"Agile" is not a software methodology, it is an ideology... it is built on a manifesto, that in practice is often corrupted as meaning something beyond what it states. There's too many articles on what Agile does or doesn't mean, but essentially it does demand design, process, documentation and tooling; it just suggests they should be enriched with greater attention to the functions that lead to results. It was created at at time, when you could still buy software off the shelves with user manuals that were hundreds of pages long and if it didn't work, you couldn't easily update it.
+
+As an ideology it has a desired goal, which is to enable software development, but promoting ways of working that help reach functional goals. It does also tend to be a bad fit for heavily regulated environments or security conscious environments.
+
+It has very obvious missing goals, it does not address non-functional requirements like compliance, performance, reliability, consistency, accessibility, maintainability, backups, ..., the list goes on.
+
+Therefore, it is a an ideology to achieve a function, regardless of how well that function works in an ever changing and complex environment.
+
+So what is missing and what do we need to add to or replace in Agile. I'd like to introduce two very important ideologies that we should add to Agile.
+<h1>The Right People:  we need expertise, not just devs</h1>
+Most devs can write great functional code based on business ideas for most logical and presentation requirements but they come unstuck when they need expertise in:
+<ul>
+	<li>Encryption</li>
+	<li>Information Security architecture</li>
+	<li>ACID /transactions</li>
+	<li>Deadlock and concurrency</li>
+	<li>Legal requirements - audit, auth, retention, access control, ...</li>
+	<li>Accessibility</li>
+	<li>...</li>
+</ul>
+<h2>An example: Encryption</h2>
+I do not know a single software developer who can write encryption libraries, like TLS 1.2 level encryption and I include myself. I believe there are lots of mathematicians and computer scientists who could develop individual encryption functions, but combined into a framework that is secure through the whole layer, I'm not sure many can.
+
+I have not met a single developer qualified to identify what encryption libraries are good or bad.
+
+So why do we let software developers pick encryption libraries and configure their implementation?
+
+AES 256 and RSA 4096 are surely all you need? Well, no, you'll still need to understand at least the following to use them:
+<ul>
+	<li>PRNGs</li>
+	<li>IVs</li>
+	<li>Sources of random</li>
+	<li>Blacklists</li>
+	<li>key lengths</li>
+	<li>key randomisation</li>
+	<li>key management</li>
+	<li>information leakage (especially dangers of using compression, caches or any other indexed data)</li>
+	<li>Appropriateness of re-use</li>
+</ul>
+<h2>But our team is small and only average software developers and QA?</h2>
+<ul>
+	<li>Contract expertise for design, review and testing</li>
+	<li>Delegate features to specialist teams (information security development)</li>
+	<li>Adopt a recognised standard (NIST, OWASP, WCAG, Mozilla recommends server sidde encryption configurations, etc)</li>
+	<li>Adopt a recognised library/application: but does the proprietary or open source library guarantee standards met to help choose adoption? You should probably avoid hashids.</li>
+	<li>Adopt a recognised service: cloud services mean everything except your business logic can likely be bought as a service, so why not do that: then it is someone else's responsibility... just have <a href="https://ico.org.uk/media/for.../cloud_computing_guidance_for_organisations.pdf">fun making sure the cloud is appropriate</a>.</li>
+	<li>Alternatively, don't do it - if a small building firm can't build a skyscraper it will find something else to do - some things are not supposed to be done by small teams and startups. Is the business value really there, is it worth employing specialist help? If the business value doesn't warrant the expertise, then it probably isn't valuable enough to be worth doing.</li>
+</ul>
+<h1>Maintenance: it isn't just bugs</h1>
+Agile typically does cater for bug fixing, but maintenance is more than that.
+<ul>
+	<li>Legal changes</li>
+	<li>Vulnerability management</li>
+	<li>Licences end, projects die</li>
+</ul>
+With GDPR arriving soon, hopefully everyone is reviewing all systems that hold, transport and ... access PII. However, it's not just GDPR that is  and has been changing, especially in more regulated environments with PCI, MIFID, GCP, Accessibility law, etc often have amendments too. Contracts with third parties typically demand levels of security that must be adhered to as well. Some of these changes are passive (you have to discover a legal change) and some are active (you are told of a contractual change) but both need to cycle into the maintenance of what would otherwise be ignored code running in production.
+
+Access is actually a really worrying problem. Many systems are setup with walls at perimeter, but not inside. So the web frontends and web api gates into the system are typically offered some lifecycle management to check for greater maintenance risks, but the other services can be just as dangerous.
+
+XXE, Remote Code Execution (reflection, SQL, etc) and even internal tooling are all often one step away from attackers and that step might not be designed to worry about the concern.
+
+The last concern is licences and discovering that your licence for proprietary software can leave you in a legal dilemma (do you shutdown to respect the licence or steal some more time, hopefully only to migrate or negotiate renewal) or that the open source project you use has died... do you take a risk and continue with unsupported and increasingly likely vulnerable software or refactor off. To do the right thing means knowing about it.
+<h2>This requires audit</h2>
+Where is audit mentioned in the Agile manifesto?
+
+Audit is a function of all business environments have and whether it is a legally qualified audit, like an accountancy audit or regulatory audit for compliance that has a high process demand or whether it is a just a regular check, like are the toilets clean with a tickbox to fill, it happens everywhere... except so much in software development.
+
+How do you check your toilets are clean in your website in production? Sounds a bit strange, but how many of us are testing for vulnerabilities, reviewing log cleanliness, etc. We might be doing the functional parts that we know will break the application: is the server running, does the database have disk space... but beyond that too many places have security problems or even embarrassingly suffer problems like their TLS certificates expiring... when that happens, it is not a failure of the dev/ops who set it up, it is a failure of the business to have a business control around it.
+
+So we might clean the toilets with a quarterly automated penetration test, alarms when the disk levels are high and a Jira scheduled ticket (why doesn't that exist?) for renewing the TLS certs, but what about the other layers of audit.
+<ul>
+	<li>What about the full stock take? Double check everything is correct and proper annually?</li>
+	<li>The expired goods? Third party software validation of not just CVEs but that there still is support from the third party</li>
+	<li>The health and safety risk assessments? Still in their early days, privacy impact assessments are becoming part of software development, but many still don't do them and are they maintained on a lifecycle basis or on a first release basis? Are the requirements drawn out from them validated?</li>
+</ul>
+As a lifecycle event it should be driven by business controls, which means they know what to control and that requires documentation, which is fine in Agile, Agile only really demanded you didn't write thousand page usage manuals like you used to get with software in the 90s (okay, some were only 600 pages).
+
+This is the key reason why Agile Software Development fails as a project management methodology alone: the business behaviours demanded are always changing and yet the project leaves features dead in Jira: with just bug fixing idling along until a new feature is demanded.
+
+&nbsp;
+
+&nbsp;
+  </div><a class="u-url" href="/2018/03/07/we-need-to-talk-about-agile.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Mark Alan Richards</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Mark Alan Richards</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/markalanrichards"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">markalanrichards</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
