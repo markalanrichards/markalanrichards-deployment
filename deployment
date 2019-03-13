@@ -3,7 +3,14 @@ server {
 	listen [::]:80 default_server;
 	root /site;
 	server_name _;
-	location / {
+	charset utf-8;
+
+    location ~* ^/.*/.*$ {
+        expires 24h;
+        try_files $uri $uri/ =404;
+    }
+	location ~* ^/[^/]*$ {
+	    expires 1h;
 		try_files $uri $uri/ =404;
 	}
 }
