@@ -1,17 +1,19 @@
 server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
-	root /site;
-	server_name _;
-	charset utf-8;
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /site;
+    server_name _;
+    charset utf-8;
 
     location ~* ^/.*/.*$ {
         expires 24h;
         try_files $uri $uri/ =404;
+        add_header 'Referrer-Policy' 'no-referrer';
     }
-	location ~* ^/[^/]*$ {
-	    expires 1h;
-		try_files $uri $uri/ =404;
-	}
+    location ~* ^/[^/]*$ {
+        expires 1h;
+        try_files $uri $uri/ =404;
+        add_header 'Referrer-Policy' 'no-referrer';
+    }
 }
 
