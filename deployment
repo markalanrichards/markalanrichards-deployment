@@ -15,5 +15,18 @@ server {
         try_files $uri $uri/ =404;
         add_header 'Referrer-Policy' 'no-referrer';
     }
+
+    rewrite ^/2018/08/12/reset-password-links-are-a-security-failure-according-to-the-http-rfc.?$ /2018/08/12/reset-password-links-are-a-security-failure-according-to-the-http-rfc.html permanent;
+    rewrite ^/2018/06/23/facebook-javascript-sdk-is-often-illegal.?$ /2018/06/23/facebook-javascript-sdk-is-often-illegal.html permanent;
+    rewrite ^/2018/06/23/nhs-provided-advertisers-analytics-and-social-media-companies-with-data-about-your-health-concerns.?$ /2018/06/23/nhs-provided-advertisers-analytics-and-social-media-companies-with-data-about-your-health-concerns.html permanent;
+    rewrite ^/2018/04/08/mozilla-is-evil.?$ /2018/04/08/mozilla-is-evil.html permanent;
+    rewrite ^/2018/03/07/we-need-to-talk-about-agile.?$ /2018/03/07/we-need-to-talk-about-agile.html permanent;
+    rewrite ^/2017/01/14/npm-is-lying-to-you-and-facebook-misses-copyright-attribution.?$ /2017/01/14/npm-is-lying-to-you-and-facebook-misses-copyright-attribution.html permanent;
+    rewrite ^/2016/10/30/complex-primitives.?$ /2016/10/30/complex-primitives.html permanent;
+    rewrite ^/2016/09/11/keeping-in-time.?$ /2016/09/11/keeping-in-time.html permanent;
+    rewrite ^/2016/09/02/ico-has-no-powers-over-webcams.?$ /2016/09/02/ico-has-no-powers-over-webcamss.html permanent;
+    rewrite ^/2016/06/22/completablefuture-will-maybe-supplyasync.?$ /2016/06/22/completablefuture-will-maybe-supplyasync.html permanent;
+    rewrite ^/2016/05/12/programming-languages-are-broken.?$ /2016/05/12/programming-languages-are-broken.html permanent;
+
 }
 
