@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Firefox Leave my DNS alone | Mark Alan Richards</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Firefox Leave my DNS alone" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Firefox: Leave my DNS alone Cloudflare DoH is not just a privacy problem. Other risks Consumer protection and choice Cloudflare Blocklists Loss of jurisdiction User confusion A bad precedent... think Superfish" />
+<meta property="og:description" content="Firefox: Leave my DNS alone Cloudflare DoH is not just a privacy problem. Other risks Consumer protection and choice Cloudflare Blocklists Loss of jurisdiction User confusion A bad precedent... think Superfish" />
+<link rel="canonical" href="/2019/09/14/firefox-leave-my-dns-alone.html" />
+<meta property="og:url" content="/2019/09/14/firefox-leave-my-dns-alone.html" />
+<meta property="og:site_name" content="Mark Alan Richards" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-09-14T17:38:00+00:00" />
+<script type="application/ld+json">
+{"description":"Firefox: Leave my DNS alone Cloudflare DoH is not just a privacy problem. Other risks Consumer protection and choice Cloudflare Blocklists Loss of jurisdiction User confusion A bad precedent... think Superfish","@type":"BlogPosting","headline":"Firefox Leave my DNS alone","dateModified":"2019-09-14T17:38:00+00:00","datePublished":"2019-09-14T17:38:00+00:00","url":"/2019/09/14/firefox-leave-my-dns-alone.html","mainEntityOfPage":{"@type":"WebPage","@id":"/2019/09/14/firefox-leave-my-dns-alone.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Mark Alan Richards" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Mark Alan Richards</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Firefox Leave my DNS alone</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-09-14T17:38:00+00:00" itemprop="datePublished">Sep 14, 2019
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1>Firefox: Leave my DNS alone</h1>
+<div>
+    <p>Cloudflare DoH is not just a privacy problem.</p>
+    <h2>Other risks</h2>
+    <ul>
+        <li>Consumer protection and choice</li>
+        <li>Cloudflare Blocklists</li>
+        <li>Loss of jurisdiction</li>
+        <li>User confusion</li>
+        <li>A bad precedent... think Superfish</li>
+    </ul>
+</div>
+
+<div>
+    <h2>What should Mozilla do to help?</h2>
+    <p>Operating systems need better tooling, not just browsers, so make an unbiased DNS tool for the operating system and make it easy to install from Firefox.
+    </p>
+    <p>dnsmasq demonstrates where this could techincally sit in the DNS stack.</p>
+    <p>Firewall and antivirus apps demonstrate the nature of app we need.</p>
+    <p>The app would need to check, notify, offer config options and recommendations: triggered by network changes.</p>    
+    <p>Offer users</p>
+    <ul>
+        <li>Visibility: To see how bad their current DNS is</li>
+        <li>Control: to learn and change their DNS config with a UI </li>
+        <li>Choice: A marketplace of providers with pros and cons listed, sure Cloudflare should be listed</li>
+        <li>Plugins: Cache control, local overrides, Bonjour/Avahi, Gnunet, Namecoin, IPNS, etc might enjoy a common
+            name resolver interface and users might trust Mozilla to install them</li>
+    </ul>
+
+</div>
+<div>
+    <h2>What is Firefox doing?</h2>
+    <p>
+        <a href="https://blog.mozilla.org/futurereleases/2019/09/06/whats-next-in-making-dns-over-https-the-default/">What&apos;s
+            next in making Encrypted DNS-over-HTTPS the Default</a>
+    </p>
+    <p>Firefox is starting the rollout of Cloudflare being the DNS provider for Firefox installs by default.
+    </p>
+    <p>Mozilla believes it knows better than the choices you made or the local network defaults.
+    </p>
+    <p>Some opinions already expressed:</p>
+    <ul>
+        <li><a href="https://ungleich.ch/en-us/cms/blog/2019/09/11/turn-off-doh-firefox/">Turn off DoH, Firefox.
+                Now.</a></li>
+        <li><a href="https://undeadly.org/cgi?action=article;sid=20190911113856">OpenBSD Journal: DoH disabled by
+                default in Firefox</a></li>
+    </ul>
+</div>
+<div>
+    <h2>My Privacy</h2>
+    <p>I live in the EU, so Cloudflare appears to be a higher privacy risk.</p>
+    <p>I know I am a low privacy risk as I'm not a: soldier, doctor, journalist, politician, cancer sufferer, member of
+        a demographic typically at risk of discrimination, ...</p>
+    <p>If I had a reason not to trust my network, I'd need a VPN, not a better DNS resolver.</p>
+</div>
+<div>
+    <h2>Consumer protection and choice</h2>
+    <p>My DNS is provided by an ISP that I pay for and because of this it has to be of merchantable quality under UK
+        law.
+    </p>
+    <p>If my ISP fails it has to answer to my wallet, my demands for a refund and potentially multiple regulators here.
+    </p>
+    <p>Should Cloudflare fail for my local network or devices what action can I take or the UK regulators?</p>
+    <p>Will I be able to change if Cloudflare becomes mainstream? Why would my ISP provide DNS services? Like email it
+        may disappear and I'm stuck with whatever Cloudflare offers.</p>
+</div>
+<div>
+    <h2>Loss of jurisdiction</h2>
+    <p>In the UK there are websites that have been banned.</p>
+    <p>Whether you agree with the Pirate Bay being blocked or not, you might agree that it's a good idea that UK users
+        cannot resolve child pornogrphy sites.</p>
+    <p>Users who wish to circumvent local jurisdiction should be looking at VPNs not DNS. In some countries I might support their efforts if well intended..</p>
+    <p>As an account holder, on a home wifi I share with friends and family, I'm not just thinking about my own browsing
+        when I want resolution to fail if they visit illegal sites.</p>
+    <p>The USA has different laws that mean it may force US companies to block content that may be okay abroad. Maybe
+        Wikileaks, maybe SciHub or maybe The Guardian when the next Snowden style leaks happen.</p>
+</div>
+<div>
+    <h2>Cloudflare Blocklists</h2>
+    <p>Cloudflare has repeatedly been known to refuse to block hosting services to content that was controversial.</p>
+    <p>However, it also has abided by some, notably removing hosting to 8chan.</p>
+    <p>Whilst I agree that 8chan should have been removed by Cloudflare, if Cloudflare has a marketplace control, like
+        over most users of Firefox, then the only blocking it should do is that necessary by law.</p>
+    <p>It might make my day to see them block DNS resolution of a company like Google, on the grounds that Google is
+        breaching privacy laws and therefore unethical to resolve, but that shouldn't be an option Cloudflare can take.
+    </p>
+</div>
+<div>
+    <h2>User confusion</h2>
+    <p>I can view my workplace email in Chrome, but not Firefox? Why?</p>
+    <p>Developers often play with DNS to investigate problems or avoid hitting production servers. This risks
+        blacklists and overrides set in infrastructure or local settings no longer working, which may cause confusion or worse security hardening techniques failing.</p>
+    <p>My security tooling is showing all this traffic going to 1.1.1.1, but I've never chosen to use it: do I have a
+        virus? I might know what 1.1.1.1, but most users on the end of a Norton or similar report might not.</p>
+    <p>A privacy invading hotel gets annoyed at 1.1.1.1 not being visible so blocks it on their network: what happens?
+        I'm guessing Firefox gives up Cloudflare or the user gives up on Firefox.</p>
+</div>
+<div>
+    <h2>A bad precedent</h2>
+    <p>Firefox is an application, like any other and deciding that apps should be managing encrypted DNS is worrying.
+    </p>
+    <p>With the privacy problems we've seen with period apps, Facebook SDK tracking and similar, users desparately need
+        control and visibility of what apps can do on the network. DNS control and similar should be in the hands of the OS and global settings users can control.</p>
+    <p>Firefox is now going to be another app that is doing weird encrypted stuff you cannot see and maybe Firefox will
+        have audit logs and network logs to see what Cloudflare gets, but will your Period app or the Facebook SDK when it starts using DoH too?
+    </p>
+    <p>And why just your apps playing directly with DoH? If apps should be taking DNS control away from your network, why not your laptop
+        manufacturer: why not Lenovo? Some manufacturers may love to take control of your network for their own purposes for ad distribution and if Firefox supports DoH controls over the network, then perhaps Lenovo should fork it and distribute it with new laptops set   to use their DoH resolver?</p>
+</div>
+  </div><a class="u-url" href="/2019/09/14/firefox-leave-my-dns-alone.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Mark Alan Richards</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Mark Alan Richards</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/markalanrichards"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">markalanrichards</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

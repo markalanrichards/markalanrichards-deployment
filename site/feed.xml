@@ -1,4 +1,112 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-09-08T16:03:38+00:00</updated><id>/feed.xml</id><title type="html">Mark Alan Richards</title><entry><title type="html">Ad tracking of Childline</title><link href="/2019/03/17/ad-tracking-of-childline.html" rel="alternate" type="text/html" title="Ad tracking of Childline" /><published>2019-03-17T02:00:00+00:00</published><updated>2019-03-17T02:00:00+00:00</updated><id>/2019/03/17/ad-tracking-of-childline</id><content type="html" xml:base="/2019/03/17/ad-tracking-of-childline.html">&lt;p&gt;You may have spotted news about
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-09-14T17:58:52+00:00</updated><id>/feed.xml</id><title type="html">Mark Alan Richards</title><entry><title type="html">Firefox Leave my DNS alone</title><link href="/2019/09/14/firefox-leave-my-dns-alone.html" rel="alternate" type="text/html" title="Firefox Leave my DNS alone" /><published>2019-09-14T17:38:00+00:00</published><updated>2019-09-14T17:38:00+00:00</updated><id>/2019/09/14/firefox-leave-my-dns-alone</id><content type="html" xml:base="/2019/09/14/firefox-leave-my-dns-alone.html">&lt;h1&gt;Firefox: Leave my DNS alone&lt;/h1&gt;
+&lt;div&gt;
+    &lt;p&gt;Cloudflare DoH is not just a privacy problem.&lt;/p&gt;
+    &lt;h2&gt;Other risks&lt;/h2&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Consumer protection and choice&lt;/li&gt;
+        &lt;li&gt;Cloudflare Blocklists&lt;/li&gt;
+        &lt;li&gt;Loss of jurisdiction&lt;/li&gt;
+        &lt;li&gt;User confusion&lt;/li&gt;
+        &lt;li&gt;A bad precedent... think Superfish&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+    &lt;h2&gt;What should Mozilla do to help?&lt;/h2&gt;
+    &lt;p&gt;Operating systems need better tooling, not just browsers, so make an unbiased DNS tool for the operating system and make it easy to install from Firefox.
+    &lt;/p&gt;
+    &lt;p&gt;dnsmasq demonstrates where this could techincally sit in the DNS stack.&lt;/p&gt;
+    &lt;p&gt;Firewall and antivirus apps demonstrate the nature of app we need.&lt;/p&gt;
+    &lt;p&gt;The app would need to check, notify, offer config options and recommendations: triggered by network changes.&lt;/p&gt;    
+    &lt;p&gt;Offer users&lt;/p&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Visibility: To see how bad their current DNS is&lt;/li&gt;
+        &lt;li&gt;Control: to learn and change their DNS config with a UI &lt;/li&gt;
+        &lt;li&gt;Choice: A marketplace of providers with pros and cons listed, sure Cloudflare should be listed&lt;/li&gt;
+        &lt;li&gt;Plugins: Cache control, local overrides, Bonjour/Avahi, Gnunet, Namecoin, IPNS, etc might enjoy a common
+            name resolver interface and users might trust Mozilla to install them&lt;/li&gt;
+    &lt;/ul&gt;
+
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;h2&gt;What is Firefox doing?&lt;/h2&gt;
+    &lt;p&gt;
+        &lt;a href=&quot;https://blog.mozilla.org/futurereleases/2019/09/06/whats-next-in-making-dns-over-https-the-default/&quot;&gt;What&amp;apos;s
+            next in making Encrypted DNS-over-HTTPS the Default&lt;/a&gt;
+    &lt;/p&gt;
+    &lt;p&gt;Firefox is starting the rollout of Cloudflare being the DNS provider for Firefox installs by default.
+    &lt;/p&gt;
+    &lt;p&gt;Mozilla believes it knows better than the choices you made or the local network defaults.
+    &lt;/p&gt;
+    &lt;p&gt;Some opinions already expressed:&lt;/p&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&quot;https://ungleich.ch/en-us/cms/blog/2019/09/11/turn-off-doh-firefox/&quot;&gt;Turn off DoH, Firefox.
+                Now.&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;https://undeadly.org/cgi?action=article;sid=20190911113856&quot;&gt;OpenBSD Journal: DoH disabled by
+                default in Firefox&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;h2&gt;My Privacy&lt;/h2&gt;
+    &lt;p&gt;I live in the EU, so Cloudflare appears to be a higher privacy risk.&lt;/p&gt;
+    &lt;p&gt;I know I am a low privacy risk as I'm not a: soldier, doctor, journalist, politician, cancer sufferer, member of
+        a demographic typically at risk of discrimination, ...&lt;/p&gt;
+    &lt;p&gt;If I had a reason not to trust my network, I'd need a VPN, not a better DNS resolver.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;h2&gt;Consumer protection and choice&lt;/h2&gt;
+    &lt;p&gt;My DNS is provided by an ISP that I pay for and because of this it has to be of merchantable quality under UK
+        law.
+    &lt;/p&gt;
+    &lt;p&gt;If my ISP fails it has to answer to my wallet, my demands for a refund and potentially multiple regulators here.
+    &lt;/p&gt;
+    &lt;p&gt;Should Cloudflare fail for my local network or devices what action can I take or the UK regulators?&lt;/p&gt;
+    &lt;p&gt;Will I be able to change if Cloudflare becomes mainstream? Why would my ISP provide DNS services? Like email it
+        may disappear and I'm stuck with whatever Cloudflare offers.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;h2&gt;Loss of jurisdiction&lt;/h2&gt;
+    &lt;p&gt;In the UK there are websites that have been banned.&lt;/p&gt;
+    &lt;p&gt;Whether you agree with the Pirate Bay being blocked or not, you might agree that it's a good idea that UK users
+        cannot resolve child pornogrphy sites.&lt;/p&gt;
+    &lt;p&gt;Users who wish to circumvent local jurisdiction should be looking at VPNs not DNS. In some countries I might support their efforts if well intended..&lt;/p&gt;
+    &lt;p&gt;As an account holder, on a home wifi I share with friends and family, I'm not just thinking about my own browsing
+        when I want resolution to fail if they visit illegal sites.&lt;/p&gt;
+    &lt;p&gt;The USA has different laws that mean it may force US companies to block content that may be okay abroad. Maybe
+        Wikileaks, maybe SciHub or maybe The Guardian when the next Snowden style leaks happen.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;h2&gt;Cloudflare Blocklists&lt;/h2&gt;
+    &lt;p&gt;Cloudflare has repeatedly been known to refuse to block hosting services to content that was controversial.&lt;/p&gt;
+    &lt;p&gt;However, it also has abided by some, notably removing hosting to 8chan.&lt;/p&gt;
+    &lt;p&gt;Whilst I agree that 8chan should have been removed by Cloudflare, if Cloudflare has a marketplace control, like
+        over most users of Firefox, then the only blocking it should do is that necessary by law.&lt;/p&gt;
+    &lt;p&gt;It might make my day to see them block DNS resolution of a company like Google, on the grounds that Google is
+        breaching privacy laws and therefore unethical to resolve, but that shouldn't be an option Cloudflare can take.
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;h2&gt;User confusion&lt;/h2&gt;
+    &lt;p&gt;I can view my workplace email in Chrome, but not Firefox? Why?&lt;/p&gt;
+    &lt;p&gt;Developers often play with DNS to investigate problems or avoid hitting production servers. This risks
+        blacklists and overrides set in infrastructure or local settings no longer working, which may cause confusion or worse security hardening techniques failing.&lt;/p&gt;
+    &lt;p&gt;My security tooling is showing all this traffic going to 1.1.1.1, but I've never chosen to use it: do I have a
+        virus? I might know what 1.1.1.1, but most users on the end of a Norton or similar report might not.&lt;/p&gt;
+    &lt;p&gt;A privacy invading hotel gets annoyed at 1.1.1.1 not being visible so blocks it on their network: what happens?
+        I'm guessing Firefox gives up Cloudflare or the user gives up on Firefox.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;h2&gt;A bad precedent&lt;/h2&gt;
+    &lt;p&gt;Firefox is an application, like any other and deciding that apps should be managing encrypted DNS is worrying.
+    &lt;/p&gt;
+    &lt;p&gt;With the privacy problems we've seen with period apps, Facebook SDK tracking and similar, users desparately need
+        control and visibility of what apps can do on the network. DNS control and similar should be in the hands of the OS and global settings users can control.&lt;/p&gt;
+    &lt;p&gt;Firefox is now going to be another app that is doing weird encrypted stuff you cannot see and maybe Firefox will
+        have audit logs and network logs to see what Cloudflare gets, but will your Period app or the Facebook SDK when it starts using DoH too?
+    &lt;/p&gt;
+    &lt;p&gt;And why just your apps playing directly with DoH? If apps should be taking DNS control away from your network, why not your laptop
+        manufacturer: why not Lenovo? Some manufacturers may love to take control of your network for their own purposes for ad distribution and if Firefox supports DoH controls over the network, then perhaps Lenovo should fork it and distribute it with new laptops set   to use their DoH resolver?&lt;/p&gt;
+&lt;/div&gt;</content><author><name></name></author><summary type="html">Firefox: Leave my DNS alone Cloudflare DoH is not just a privacy problem. Other risks Consumer protection and choice Cloudflare Blocklists Loss of jurisdiction User confusion A bad precedent... think Superfish</summary></entry><entry><title type="html">Ad tracking of Childline</title><link href="/2019/03/17/ad-tracking-of-childline.html" rel="alternate" type="text/html" title="Ad tracking of Childline" /><published>2019-03-17T02:00:00+00:00</published><updated>2019-03-17T02:00:00+00:00</updated><id>/2019/03/17/ad-tracking-of-childline</id><content type="html" xml:base="/2019/03/17/ad-tracking-of-childline.html">&lt;p&gt;You may have spotted news about
     &lt;a href=&quot;https://www.bloomberg.com/news/articles/2019-01-24/how-period-tracking-apps-are-monetizing-women-s-extremely-personal-data&quot;&gt;period&lt;/a&gt;,
     &lt;a href=&quot;https://www.theguardian.com/world/2018/jan/28/fitness-tracking-app-gives-away-location-of-secret-us-army-bases&quot;&gt;fitness&lt;/a&gt;
     and &lt;a href=&quot;https://techcrunch.com/2017/08/24/accuweather-update-reveal-mobile/&quot;&gt;weather&lt;/a&gt;
@@ -600,18 +708,4 @@ So why not just use an incrementing counter? The order of log lines effectively 
 &lt;/ul&gt;
 &lt;/li&gt;
 	&lt;li&gt;For strict ordering of events, don't use time: but keep a reference for indexing (finding the log lines)&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">Now it is 15:31 on the 11-09-2016 and I'm in London. Writing and Reading dates Always use the order or full year, month then day of month. Text ordering is now time ordered 2016-06-06 is always after 2015-06-07 in text and time 06-07-2016 is before 07-06-2015 and after 05-06-2014 in text ordering, but not in time. This useful in table ordering, like when listing files. Local differences don't matter so much (Europe vs USA format) Offset Time The UK has British Summer Time, so that time point is 1 hour ahead of where it should be, so the time is actually 2016-09-11T15:31:00+01:00 (in ISO 8601 format). Zoned Time If I asked you to call me at this time in 6 months, I might not appreciate a call at 2017-03-11T15:31:00+01:00 because I'm then out of Daylight Savings, so instead it's useful to capture the time zone.</summary></entry><entry><title type="html">ICO has no powers over webcams</title><link href="/2016/09/02/ico-has-no-powers-over-webcams.html" rel="alternate" type="text/html" title="ICO has no powers over webcams" /><published>2016-09-02T11:40:49+00:00</published><updated>2016-09-02T11:40:49+00:00</updated><id>/2016/09/02/ico-has-no-powers-over-webcams</id><content type="html" xml:base="/2016/09/02/ico-has-no-powers-over-webcams.html">&lt;p style=&quot;text-align:left;&quot; align=&quot;center&quot;&gt;&lt;a href=&quot;https://ico.org.uk/media/1043287/ico-letter-to-webcam-manufacturers.pdf&quot;&gt;ICO published a letter to Webcam manufacturers...&lt;/a&gt; well you don't have to pay much attention to it if you are one.&lt;/p&gt;
-&lt;p style=&quot;text-align:left;&quot; align=&quot;center&quot;&gt;&lt;a href=&quot;https://www.eff.org/deeplinks/2015/11/superfish-20-now-dell-breaking-https&quot;&gt;Dell decided to break https encryption on their laptops by installed a vulnerable root certificate. &lt;/a&gt;&lt;/p&gt;
-&lt;p style=&quot;text-align:left;&quot; align=&quot;center&quot;&gt;If you run a business and store personal data, you must go through heaps of hoops to ensure you are compliant with data protection law. But the manufacturer of the server, network equipment and laptops you have to use has no requirements: so they can be as insecure as they like and you pick up the bill when the ICO chases down their breach.&lt;/p&gt;
-&lt;p align=&quot;center&quot;&gt;&lt;b&gt;Case Reference Number RFA0606701&lt;/b&gt;&lt;/p&gt;
-I write in relation to your concerns about Dell’s new equipment security fault, about which my colleague has previously responded to you.
-
-The DPA works by placing obligations on organisations that hold personal information. The DPA does not however place any obligations on the manufacturers of equipment that may be used for storing personal information.
-
-The security requirement of the DPA (the seventh data protection principle) requires an organisation holding personal data to have adequate technical and organisational measures in place to protect the personal data (taking account of the nature of the information being held, the availability of technology, and the cost of implementing those measures).
-
-As such, an organisation that has purchased Dell equipment subject to the fault for the storage of personal data may be contravening the DPA if they have failed to keep personal data secure as a result of their use of insecure equipment for the storage of personal data.
-
-Dell is not contravening any requirements of the DPA by selling insecure equipment. The DPA does not, in any way, require suppliers of equipment to ensure their products are secure. The obligations arising from the DPA are for organisations using the equipment for the storage of personal data.
-
-Because our powers are specific to the DPA there is therefore no punitive or other action we can take against Dell over its failure to sell secure computer equipment.</content><author><name></name></author><summary type="html">ICO published a letter to Webcam manufacturers... well you don't have to pay much attention to it if you are one. Dell decided to break https encryption on their laptops by installed a vulnerable root certificate. If you run a business and store personal data, you must go through heaps of hoops to ensure you are compliant with data protection law. But the manufacturer of the server, network equipment and laptops you have to use has no requirements: so they can be as insecure as they like and you pick up the bill when the ICO chases down their breach. Case Reference Number RFA0606701 I write in relation to your concerns about Dell’s new equipment security fault, about which my colleague has previously responded to you.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Now it is 15:31 on the 11-09-2016 and I'm in London. Writing and Reading dates Always use the order or full year, month then day of month. Text ordering is now time ordered 2016-06-06 is always after 2015-06-07 in text and time 06-07-2016 is before 07-06-2015 and after 05-06-2014 in text ordering, but not in time. This useful in table ordering, like when listing files. Local differences don't matter so much (Europe vs USA format) Offset Time The UK has British Summer Time, so that time point is 1 hour ahead of where it should be, so the time is actually 2016-09-11T15:31:00+01:00 (in ISO 8601 format). Zoned Time If I asked you to call me at this time in 6 months, I might not appreciate a call at 2017-03-11T15:31:00+01:00 because I'm then out of Daylight Savings, so instead it's useful to capture the time zone.</summary></entry></feed>
