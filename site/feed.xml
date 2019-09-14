@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-09-14T18:22:38+00:00</updated><id>/feed.xml</id><title type="html">Mark Alan Richards</title><entry><title type="html">Firefox: Leave my DNS alone</title><link href="/2019/09/14/firefox-leave-my-dns-alone.html" rel="alternate" type="text/html" title="Firefox: Leave my DNS alone" /><published>2019-09-14T17:38:00+00:00</published><updated>2019-09-14T17:38:00+00:00</updated><id>/2019/09/14/firefox-leave-my-dns-alone</id><content type="html" xml:base="/2019/09/14/firefox-leave-my-dns-alone.html">&lt;div&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-09-14T18:35:27+00:00</updated><id>/feed.xml</id><title type="html">Mark Alan Richards</title><entry><title type="html">Firefox: Leave my DNS alone</title><link href="/2019/09/14/firefox-leave-my-dns-alone.html" rel="alternate" type="text/html" title="Firefox: Leave my DNS alone" /><published>2019-09-14T17:38:00+00:00</published><updated>2019-09-14T17:38:00+00:00</updated><id>/2019/09/14/firefox-leave-my-dns-alone</id><content type="html" xml:base="/2019/09/14/firefox-leave-my-dns-alone.html">&lt;div&gt;
     &lt;p&gt;Cloudflare DoH is not just a privacy problem.&lt;/p&gt;
     &lt;h2&gt;Other risks&lt;/h2&gt;
     &lt;ul&gt;
@@ -86,12 +86,11 @@
 &lt;/div&gt;
 &lt;div&gt;
     &lt;h2&gt;User confusion&lt;/h2&gt;
+    &lt;p&gt;Think about the following scenarios:&lt;/p&gt;
     &lt;p&gt;I can view my workplace email in Chrome, but not Firefox? Why?&lt;/p&gt;
     &lt;p&gt;Developers often play with DNS to investigate problems or avoid hitting production servers. This risks
         blacklists and overrides set in infrastructure or local settings no longer working, which may cause confusion or worse security hardening techniques failing.&lt;/p&gt;
-    &lt;p&gt;My security tooling is showing all this traffic going to 1.1.1.1, but I've never chosen to use it: do I have a
-        virus? I might know what 1.1.1.1, but most users on the end of a Norton or similar report might not.&lt;/p&gt;
-    &lt;p&gt;A privacy invading hotel gets annoyed at 1.1.1.1 not being visible so blocks it on their network: what happens?
+    &lt;p&gt;A privacy invading hotel gets annoyed at 1.1.1.1 not being visible so blocks it on their wifi: what happens?
         I'm guessing Firefox gives up Cloudflare or the user gives up on Firefox.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div&gt;
