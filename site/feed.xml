@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-10-08T23:20:30+00:00</updated><id>/feed.xml</id><title type="html">Mark Alan Richards</title><entry><title type="html">British privacy regulator breaches privacy</title><link href="/2019/10/08/British-privacy-regulator-breaches-privacy.html" rel="alternate" type="text/html" title="British privacy regulator breaches privacy" /><published>2019-10-08T22:47:00+00:00</published><updated>2019-10-08T22:47:00+00:00</updated><id>/2019/10/08/British-privacy-regulator-breaches-privacy</id><content type="html" xml:base="/2019/10/08/British-privacy-regulator-breaches-privacy.html">&lt;p&gt;In April 2018 I emailed the ICO about Twitter receiving identifiable tracking data of what pages users of the ICO
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-10-08T23:24:53+00:00</updated><id>/feed.xml</id><title type="html">Mark Alan Richards</title><entry><title type="html">British privacy regulator breaches privacy</title><link href="/2019/10/08/British-privacy-regulator-breaches-privacy.html" rel="alternate" type="text/html" title="British privacy regulator breaches privacy" /><published>2019-10-08T22:47:00+00:00</published><updated>2019-10-08T22:47:00+00:00</updated><id>/2019/10/08/British-privacy-regulator-breaches-privacy</id><content type="html" xml:base="/2019/10/08/British-privacy-regulator-breaches-privacy.html">&lt;p&gt;In April 2018 I emailed the ICO about Twitter receiving identifiable tracking data of what pages users of the ICO
     website were visiting.&lt;/p&gt;
 &lt;p&gt;
     &lt;pre&gt;&lt;code&gt;    curl &amp;#x27;https://platform.twitter.com/widgets/widget_iframe.1966f64be47cf16b7a48642c76cc6202.html?origin=https%3A%2F%2Fico.org.uk&amp;amp;settingsEndpoint=https%3A%2F%2Fsyndication.twitter.com%2Fsettings&amp;#x27; \
@@ -156,7 +156,7 @@
     Upgrade-Insecure-Requests: 1
     Cache-Control: max-age=0
     &lt;/code&gt;&lt;/pre&gt;
-        &lt;h4&gt;With a Vimeo account: some cookies look like their from Google and Facebook analytics software&lt;/h4&gt;
+        &lt;h4&gt;With a Vimeo account: some cookies look like they are from Google and Facebook analytics software&lt;/h4&gt;
         &lt;pre&gt;&lt;code&gt;    GET /video/358070413?loop=1 HTTP/1.1
     Host: player.vimeo.com
     User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0
