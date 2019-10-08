@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-10-08T23:08:12+00:00</updated><id>/feed.xml</id><title type="html">Mark Alan Richards</title><entry><title type="html">British privacy regulator breaches privacy</title><link href="/2019/10/08/British-privacy-regulator-breaches-privacy.html" rel="alternate" type="text/html" title="British privacy regulator breaches privacy" /><published>2019-10-08T22:47:00+00:00</published><updated>2019-10-08T22:47:00+00:00</updated><id>/2019/10/08/British-privacy-regulator-breaches-privacy</id><content type="html" xml:base="/2019/10/08/British-privacy-regulator-breaches-privacy.html">&lt;p&gt;In April 2018 I emailed the ICO about Twitter receiving identifiable tracking data of what pages users of the ICO
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-10-08T23:20:30+00:00</updated><id>/feed.xml</id><title type="html">Mark Alan Richards</title><entry><title type="html">British privacy regulator breaches privacy</title><link href="/2019/10/08/British-privacy-regulator-breaches-privacy.html" rel="alternate" type="text/html" title="British privacy regulator breaches privacy" /><published>2019-10-08T22:47:00+00:00</published><updated>2019-10-08T22:47:00+00:00</updated><id>/2019/10/08/British-privacy-regulator-breaches-privacy</id><content type="html" xml:base="/2019/10/08/British-privacy-regulator-breaches-privacy.html">&lt;p&gt;In April 2018 I emailed the ICO about Twitter receiving identifiable tracking data of what pages users of the ICO
     website were visiting.&lt;/p&gt;
 &lt;p&gt;
     &lt;pre&gt;&lt;code&gt;    curl &amp;#x27;https://platform.twitter.com/widgets/widget_iframe.1966f64be47cf16b7a48642c76cc6202.html?origin=https%3A%2F%2Fico.org.uk&amp;amp;settingsEndpoint=https%3A%2F%2Fsyndication.twitter.com%2Fsettings&amp;#x27; \
@@ -20,7 +20,8 @@
 &lt;p&gt;The ICO is the UK's data protection regulator, expected to enforce GDPR and ePrivacy (the cookie law).&lt;/p&gt;
 &lt;p&gt;Not break them&lt;/p&gt;
 &lt;div&gt;
-    &lt;h2&gt;Here are two videos posted (that don't invade your privacy no cookies!) and should work in most browsers&lt;/h2&gt;&gt;
+    &lt;h2&gt;Here are two videos demoing the problem&lt;/h2&gt;
+    &lt;p&gt;Neither video uses cookies, the ICO doesn't need them on its website either.&lt;/p&gt;
     &lt;p&gt;Video showing Vimeo cookies&lt;/p&gt;
     &lt;video controls=&quot;&quot; width=&quot;960&quot;&gt;
         &lt;source src=&quot;/assets/videos/ico-vimeo.webm&quot; type=&quot;video/webm&quot;&gt;
