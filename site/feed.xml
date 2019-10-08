@@ -1,4 +1,194 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-09-14T18:35:27+00:00</updated><id>/feed.xml</id><title type="html">Mark Alan Richards</title><entry><title type="html">Firefox: Leave my DNS alone</title><link href="/2019/09/14/firefox-leave-my-dns-alone.html" rel="alternate" type="text/html" title="Firefox: Leave my DNS alone" /><published>2019-09-14T17:38:00+00:00</published><updated>2019-09-14T17:38:00+00:00</updated><id>/2019/09/14/firefox-leave-my-dns-alone</id><content type="html" xml:base="/2019/09/14/firefox-leave-my-dns-alone.html">&lt;div&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-10-08T23:08:12+00:00</updated><id>/feed.xml</id><title type="html">Mark Alan Richards</title><entry><title type="html">British privacy regulator breaches privacy</title><link href="/2019/10/08/British-privacy-regulator-breaches-privacy.html" rel="alternate" type="text/html" title="British privacy regulator breaches privacy" /><published>2019-10-08T22:47:00+00:00</published><updated>2019-10-08T22:47:00+00:00</updated><id>/2019/10/08/British-privacy-regulator-breaches-privacy</id><content type="html" xml:base="/2019/10/08/British-privacy-regulator-breaches-privacy.html">&lt;p&gt;In April 2018 I emailed the ICO about Twitter receiving identifiable tracking data of what pages users of the ICO
+    website were visiting.&lt;/p&gt;
+&lt;p&gt;
+    &lt;pre&gt;&lt;code&gt;    curl &amp;#x27;https://platform.twitter.com/widgets/widget_iframe.1966f64be47cf16b7a48642c76cc6202.html?origin=https%3A%2F%2Fico.org.uk&amp;amp;settingsEndpoint=https%3A%2F%2Fsyndication.twitter.com%2Fsettings&amp;#x27; \
+        -H &amp;#x27;Referer: https://ico.org.uk/global/cookies/&amp;#x27; \
+        -H &amp;#x27;Cookie: personalization_id=&amp;quot;v1_1axooVApMv4kdQlRP0kJOA==&amp;quot;; guest_id=v1%3A151762216238340054; _ga=GA1.2.1216735797.1517622164; eu_cn=1; tfw_exp=0; dnt=1; ads_prefs=&amp;quot;HBISAAA=&amp;quot;; kdt=pZ2uCnWdpMHbENSaC0VyO3qW3GioHnuDLBDUeQUX; remember_checked_on=1; twid=&amp;quot;u=66337826&amp;quot;; auth_token=3010b5c28bae881299c6ec636f788ba1931b5e7d; __utma=43838368.1216735797.1517622164.1523130476.1523130476.1; __utmz=43838368.1523130476.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)&amp;#x27; 
+    &lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;I complained; it disappeared.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Today, their website sends identifiable tracking data for some pages to third parties; including Vimeo, Youtube and
+    Google.&lt;/p&gt;
+&lt;p&gt;Let's be clear, it does not appear to be on many pages.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;However, this is a bit like discovering a police commissioner does drugs... don't worry it's just weed and only
+        at festivals.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I hope you can enjoy the irony; but after a giggle, the reality is pretty sad.&lt;/p&gt;
+
+&lt;p&gt;The ICO is the UK's data protection regulator, expected to enforce GDPR and ePrivacy (the cookie law).&lt;/p&gt;
+&lt;p&gt;Not break them&lt;/p&gt;
+&lt;div&gt;
+    &lt;h2&gt;Here are two videos posted (that don't invade your privacy no cookies!) and should work in most browsers&lt;/h2&gt;&gt;
+    &lt;p&gt;Video showing Vimeo cookies&lt;/p&gt;
+    &lt;video controls=&quot;&quot; width=&quot;960&quot;&gt;
+        &lt;source src=&quot;/assets/videos/ico-vimeo.webm&quot; type=&quot;video/webm&quot;&gt;
+        &lt;source src=&quot;/assets/videos/ico-vimeo.mp4&quot; type=&quot;video/mp4&quot;&gt;
+    &lt;/video&gt;
+    &lt;p&gt;Video showing Youtube cookies&lt;/p&gt;
+    &lt;video controls=&quot;&quot; width=&quot;960&quot;&gt;
+        &lt;source src=&quot;/assets/videos/ico-youtube.webm&quot; type=&quot;video/webm&quot;&gt;
+        &lt;source src=&quot;/assets/videos/ico-youtube.mp4&quot; type=&quot;video/mp4&quot;&gt;
+    &lt;/video&gt;
+    &lt;p&gt;There's no excuse for the ICO not to do a similar thing.&lt;/p&gt;
+&lt;/div&gt;
+&lt;ul&gt;
+    &lt;li&gt;Youtube
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&quot;#google-cookies&quot;&gt;google.com cookies&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#youtube-cookies&quot;&gt;youtube.com cookies&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#youtube-privacy&quot;&gt;ICO misrepresents Youtube cookies&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Vimeo
+
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&quot;#vimeo-cookies&quot;&gt;Vimeo: lots of cookies&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#vimeo-privacy&quot;&gt;ICO misrepresents Vimeo cookies&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+
+    &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div&gt;
+    &lt;h2&gt;Youtube&lt;/h2&gt;
+    &lt;p&gt;Youtube offers a more private version of their player that claims to not use cookies&lt;/p&gt;
+    &lt;p&gt;Not exactly surprising, but Youtube lied; which is the ICO's problem as they should have spotted this with a
+        simple test.&lt;/p&gt;
+    &lt;div id=&quot;google-cookies&quot;&gt;
+        &lt;h3&gt;Youtube No Cookie includes google.com cookie&lt;/h3&gt;
+        &lt;p&gt;youtube-nocookie.com is a video player that promises no cookies. However, the player includes a dependency on
+            a request to google.com, which will be paired with Google cookies including Google account identifiers.
+        &lt;/p&gt;
+        &lt;p&gt;Note: the dependency currently has a cache expiry of 365 days, so the chances of being affected may be slim.
+        &lt;/p&gt;
+        &lt;p&gt;Google can match this data to the user and the ICO page view if you have a Google account or likely if you've
+            used Google.&lt;/p&gt;
+
+        &lt;pre&gt;&lt;code&gt;
+    GET /js/bg/HrK92udDk6HoGDmAxeAPjdRCsXObyhVNLwAlDW4jykM.js HTTP/1.1
+    Host: www.google.com
+    User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0
+    Accept: */*
+    Accept-Language: en-GB,en;q=0.5
+    Accept-Encoding: gzip, deflate, br
+    Referer: https://www.youtube-nocookie.com/embed/NzX3PPddUVo?feature=oembed
+    Cookie: CONSENT=WP.27ee3a; 1P_JAR=2019-10-03-20; NID=188=fcHkPZF7m10gNkVCvmI7zmbJ5NiTxatB8xNr5FHnRJcARVGIGOkriNEXzO5Cwhau1A2OlU0ES1ubQi0HqhSyYtoK-rM1r59pTMHNNBvmWklLHiTp_Rkc46SK29ZRmZl0_WpqCH4dXRCeYPS67d0J1k_FbWtmCTFS_0O5o8E4bR4; ANID=AHWqTUmW7cZgZqHuOE0LcehhZQ0_RZNDj2AnQULVayYFBiGs-WrFedtZxz39Og28
+    Connection: keep-alive
+    Pragma: no-cache
+    Cache-Control: no-cache&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;/div&gt;
+    &lt;div id=&quot;youtube-cookies&quot;&gt;
+        &lt;h3&gt;Youtube No Cookie sometimes loads Youtube cookies&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;~8% of the UK does not speak English as their first language&lt;/li&gt;
+            &lt;li&gt;1/6 UK adult population is affected by hearing loss&lt;/li&gt;
+            &lt;li&gt;Many people use the web in quiet or noisy situations: on transport, in an open office, outdoors with
+                background noise like radio or TV.&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;p&gt;So a lot of people have a reason to use subtitles. Do it and Youtube get tracking data that will pair to a
+            Youtube account if you have one.&lt;/p&gt;
+        &lt;pre&gt;&lt;code&gt;    GET /api/timedtext?v=ZqzGM8nUsDo&amp;asr_langs=de%2Cen%2Ces%2Cfr%2Cit%2Cja%2Cko%2Cnl%2Cpt%2Cru&amp;caps=asr&amp;xorp=true&amp;hl=en-GB&amp;ip=0.0.0.0&amp;ipbits=0&amp;expire=1570167963&amp;sparams=ip%2Cipbits%2Cexpire%2Cv%2Casr_langs%2Ccaps%2Cxorp&amp;signature=D1395DA0C2116757EAA453EEE78B761FC2A18F07.12E6A1E623A964A2C5D3346DDA7C2511B98FA90B&amp;key=yt8&amp;kind=asr&amp;lang=en&amp;fmt=srv3&amp;xorb=2&amp;xobt=3&amp;xovt=3 HTTP/1.1
+    Host: www.youtube.com
+    User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0
+    Accept: */*
+    Accept-Language: en-GB,en;q=0.5
+    Accept-Encoding: gzip, deflate, br
+    Referer: https://www.youtube-nocookie.com/embed/ZqzGM8nUsDo
+    Origin: https://www.youtube-nocookie.com
+    Cookie: PREF=f1=50000000; VISITOR_INFO1_LIVE=si2dxYzatEI; GPS=1; YSC=ZQ9Sf3PAtT8; CONSENT=WP.27ee48
+    Connection: keep-alive
+    Pragma: no-cache
+    Cache-Control: no-cache&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;youtube-privacy&quot;&gt;
+        &lt;h3&gt;ICO misrepresents Youtube cookies&lt;/h3&gt;
+        &lt;p&gt;Under the video in the &lt;a href=&quot;https://ico.org.uk/global/privacy-notice/&quot;&gt;Privacy Notice&lt;/a&gt;, you can see
+        &lt;/p&gt;
+        &lt;p&gt;&lt;em&gt;Pressing play on the video above will set a third-party cookie Please read our &lt;a
+                    href=&quot;https://ico.org.uk/global/cookies/&quot;&gt;cookie policy&lt;/a&gt; for more
+                information.&lt;/em&gt;&lt;/p&gt;
+        &lt;p&gt;(However, the google.com cookie is already loaded before play if you are affected by it.)&lt;/p&gt;
+        &lt;p&gt;The &lt;a href=&quot;https://ico.org.uk/global/cookies/&quot;&gt;Cookies Policy&lt;/a&gt; states&lt;/p&gt;
+
+        &lt;p&gt;&lt;em&gt;We embed videos from our official YouTube channel using YouTube&amp;#x27;s privacy-enhanced mode. This mode
+                may
+                set cookies on your computer once you click on the YouTube video player, but YouTube will not store
+                personally-identifiable cookie information for playbacks of embedded videos using the privacy-enhanced
+                mode.
+                Read more at &lt;a href=&quot;https://support.google.com/youtube/answer/171780?hl=en-GB&quot;&gt;YouTube&amp;#x27;s
+                    embedding videos information page.&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+        &lt;p&gt;Okay, so let's visit the Youtube page, which states&lt;/p&gt;
+        &lt;p&gt;&lt;em&gt;(The privacy-enhanced mode only relates to tracking of viewer behaviour, not ad-serving behaviour. To
+                disable tracking for advertising purposes, you can add yourself to the Tag for child-directed treatment
+                page.)&lt;/em&gt;&lt;/p&gt;
+
+        &lt;p&gt;I'm not sure I trust Youtube's commitment.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;h2&gt;Vimeo&lt;/h2&gt;
+    &lt;div id=&quot;vimeo-cookies&quot;&gt;
+        &lt;h3&gt;Vimeo cookies&lt;/h3&gt;
+
+        &lt;p&gt;Loading the page with a video present, regardless of playing it, results in a request to Vimeo.&lt;/p&gt;
+        &lt;p&gt;For users who've never been to Vimeo, you might be lucky and just have a vuid cookie set; pairing you to
+            a
+            tracking id that may reveal your identity to vimeo later.&lt;/p&gt;
+        &lt;p&gt;For users who've got a Vimeo account, Vimeo get cookies that identify exactly who you are and the ICO
+            page
+            you are visiting.&lt;/p&gt;
+
+        &lt;h4&gt;Without a Vimeo account&lt;/h4&gt;
+        &lt;pre&gt;&lt;code&gt;    GET /video/358070413?loop=1 HTTP/1.1
+    Host: player.vimeo.com
+    User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0
+    Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+    Accept-Language: en-GB,en;q=0.5
+    Accept-Encoding: gzip, deflate, br
+    Referer: https://ico.org.uk/for-organisations/data-protection-and-brexit/data-protection-and-brexit-for-small-organisations/
+    Cookie: vuid=pl935718006.582706622
+    Connection: keep-alive
+    Upgrade-Insecure-Requests: 1
+    Cache-Control: max-age=0
+    &lt;/code&gt;&lt;/pre&gt;
+        &lt;h4&gt;With a Vimeo account: some cookies look like their from Google and Facebook analytics software&lt;/h4&gt;
+        &lt;pre&gt;&lt;code&gt;    GET /video/358070413?loop=1 HTTP/1.1
+    Host: player.vimeo.com
+    User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0
+    Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+    Accept-Language: en-GB,en;q=0.5
+    Accept-Encoding: gzip, deflate, br
+    Referer: https://ico.org.uk/for-organisations/data-protection-and-brexit/data-protection-and-brexit-for-small-organisations/
+    Cookie: vuid=pl538282171.1754524407; _bpsid=e21af1b1-1ae2-4aaf-aa7d-914d2ae050d5; _gcl_au=1.1.117979163.1570144889; _ga=GA1.2.1411508309.1570144890; _gid=GA1.2.1730788029.1570144890; _fbp=fb.1.1570144893155.1441182793; __qca=P0-1981308565-1570144892675; vimeo_gdpr_optin=1; vimeo=OHL4SeXt4SeMVHLeZ4LdeLX4MxHXcBae%2CZPcDccceZ4c4tLN4XeS%2Cd4a3NZB43%2C4c4DMw3h_OI3uHLM5i_Ic9j3H9ubNwizNVi9wMIHeNa4ateePPDPN4X4tDet4%2CaZPNZacDNPNZP44XLBtZaXBBLXPd4ca%2C3BPaeSdN4D; __ssid=8a862efc-ebab-4cb4-9f9f-0700fdee5887; player=&quot;&quot;; has_logged_in=1; site_settings=%7B%22browse_format_vid%22%3A%22video%22%7D; continuous_play_v3=1; __gads=ID=9de2d6ff5570d131:T=1570145696:S=ALNI_MYR0_jgJOqKfNfRRJ5jBUsfJfFwZg
+    Connection: keep-alive
+    Upgrade-Insecure-Requests: 1
+    Cache-Control: max-age=0
+    &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;vimeo-privacy&quot;&gt;
+        &lt;h3&gt;ICO misrepresents Vimeo cookies &lt;/h3&gt;
+        &lt;p&gt;&lt;a
+                href=&quot;https://ico.org.uk/for-organisations/data-protection-and-brexit/data-protection-and-brexit-for-small-organisations/&quot;&gt;Stated
+                below the video&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;em&gt;Pressing play on the videos above will set third-party cookies necessary for the video to play and
+                collecting analytics such as the length of time the video was played. The third party cookies do not
+                track users. Please read our cookie policy for more information&lt;/em&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;a href=&quot;https://ico.org.uk/global/cookies/&quot;&gt;The Cookies page then states&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;em&gt;We embed videos from our official Vimeo channel. When you press play Vimeo will drop third party
+                cookies
+                to enable the the video to play and to collect analytics data such as how long a viewer has watched
+                the
+                video. These cookies do not track individuals. &lt;/em&gt;&lt;/p&gt;
+        &lt;p&gt;Obviously these statements are both false.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&quot;har-data&quot;&gt;
+    &lt;a href=&quot;/assets/ico.zip&quot;&gt;Har data; Vimeo account was deleted.&lt;/a&gt;
+&lt;/div&gt;</content><author><name></name></author><summary type="html">In April 2018 I emailed the ICO about Twitter receiving identifiable tracking data of what pages users of the ICO website were visiting. curl &amp;#x27;https://platform.twitter.com/widgets/widget_iframe.1966f64be47cf16b7a48642c76cc6202.html?origin=https%3A%2F%2Fico.org.uk&amp;amp;settingsEndpoint=https%3A%2F%2Fsyndication.twitter.com%2Fsettings&amp;#x27; \ -H &amp;#x27;Referer: https://ico.org.uk/global/cookies/&amp;#x27; \ -H &amp;#x27;Cookie: personalization_id=&amp;quot;v1_1axooVApMv4kdQlRP0kJOA==&amp;quot;; guest_id=v1%3A151762216238340054; _ga=GA1.2.1216735797.1517622164; eu_cn=1; tfw_exp=0; dnt=1; ads_prefs=&amp;quot;HBISAAA=&amp;quot;; kdt=pZ2uCnWdpMHbENSaC0VyO3qW3GioHnuDLBDUeQUX; remember_checked_on=1; twid=&amp;quot;u=66337826&amp;quot;; auth_token=3010b5c28bae881299c6ec636f788ba1931b5e7d; __utma=43838368.1216735797.1517622164.1523130476.1523130476.1; __utmz=43838368.1523130476.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)&amp;#x27; I complained; it disappeared.</summary></entry><entry><title type="html">Firefox: Leave my DNS alone</title><link href="/2019/09/14/firefox-leave-my-dns-alone.html" rel="alternate" type="text/html" title="Firefox: Leave my DNS alone" /><published>2019-09-14T17:38:00+00:00</published><updated>2019-09-14T17:38:00+00:00</updated><id>/2019/09/14/firefox-leave-my-dns-alone</id><content type="html" xml:base="/2019/09/14/firefox-leave-my-dns-alone.html">&lt;div&gt;
     &lt;p&gt;Cloudflare DoH is not just a privacy problem.&lt;/p&gt;
     &lt;h2&gt;Other risks&lt;/h2&gt;
     &lt;ul&gt;
@@ -87,7 +277,7 @@
 &lt;div&gt;
     &lt;h2&gt;User confusion&lt;/h2&gt;
     &lt;p&gt;Think about the following scenarios:&lt;/p&gt;
-    &lt;p&gt;I can view my workplace email in Chrome, but not Firefox? Why?&lt;/p&gt;
+    &lt;p&gt;I can view my workplace email in Chrome, but not Firefox? Why? How will Firefox keep up with intranet resolvers that come and go according to users context and may be different on the open web than in the office?&lt;/p&gt;
     &lt;p&gt;Developers often play with DNS to investigate problems or avoid hitting production servers. This risks
         blacklists and overrides set in infrastructure or local settings no longer working, which may cause confusion or worse security hardening techniques failing.&lt;/p&gt;
     &lt;p&gt;A privacy invading hotel gets annoyed at 1.1.1.1 not being visible so blocks it on their wifi: what happens?
@@ -659,51 +849,4 @@ Eventually, much of the data you use ends up moving through the buses on your sy
 
 So when you use these complex primitives you might not want to just use the language primitives: but optimise for the bus/packet/page sizes involved. Should these be primitives? Well that might depend on your architecture and for a cross platform language I guess you should let it be a language specific optimization to curry in an outside primitive.
 &lt;h1&gt;So how to solve this for writing a new language?&lt;/h1&gt;
-Copy Scala and Groovy: use the JVM to solve this for you and give you a consistent view of the world and force everyone to map using Java data structure until later... although I'm tempted to checkout the CLR/Mono too.</content><author><name></name></author><summary type="html">I have a crazy idea: create a cross-platform language, no not Java: something better. Primitives are supposed to the simplest form of data in a programming language. So how hard can it be to work with them... Typical representations References (pointers) Boolean Integer numbers Floating point numbers (binary and sometimes decimal) Primitive structures (array, list) Character(s) Boolean is complex In typical computing systems, everything is a 0 or  a 1, except usually nothing is.</summary></entry><entry><title type="html">Keeping in Time</title><link href="/programming/2016/09/11/keeping-in-time.html" rel="alternate" type="text/html" title="Keeping in Time" /><published>2016-09-11T15:25:21+00:00</published><updated>2016-09-11T15:25:21+00:00</updated><id>/programming/2016/09/11/keeping-in-time</id><content type="html" xml:base="/programming/2016/09/11/keeping-in-time.html">Now it is 15:31 on the 11-09-2016 and I'm in London.
-&lt;h2&gt;Writing and Reading dates&lt;/h2&gt;
-Always use the order or full year, month then day of month.
-&lt;ul&gt;
-	&lt;li&gt;Text ordering is now time ordered
-&lt;ul&gt;
-	&lt;li&gt;2016-06-06 is always after 2015-06-07 in text and time&lt;/li&gt;
-	&lt;li&gt;06-07-2016 is before 07-06-2015 and after 05-06-2014 in text ordering, but not in time.&lt;/li&gt;
-	&lt;li&gt;This useful in table ordering, like when listing files.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-	&lt;li&gt;Local differences don't matter so much (Europe vs USA format)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Offset Time&lt;/h2&gt;
-The UK has British Summer Time, so that time point is 1 hour ahead of where it should be, so the time is actually 2016-09-11T15:31:00+01:00 (in ISO 8601 format).
-&lt;h2&gt;Zoned Time&lt;/h2&gt;
-If I asked you to call me at this time in 6 months, I might not appreciate a call at 2017-03-11T15:31:00+01:00 because I'm then out of Daylight Savings, so instead it's useful to capture the time zone.
-
-Like this, 2017-03-11T15:31:00 [Europe/London] where Europe/London is an official &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_tz_database_time_zones&quot;&gt;designation&lt;/a&gt; of my time zone. Except this isn't quite good enough...
-
-What if I wanted a call at 2am on 29th of October, 2017?
-
-2017-10-29T02:00:00 [Europe/London] happens twice and so to be as distinct as possible then perhaps 2017-10-29T02:00:00+00:00 [Europe/London] and 2017-10-29T02:00:00+01:00 [Europe/London] would be enough to know which is which.
-&lt;h2&gt;GPS Time is ordered?&lt;/h2&gt;
-Be wary of using GPS time. Although GPS time is an unadjusted series of seconds since a point in time, will it always be so? It's use case is for positioning and if there ever were a need, I would guess adjusting time to fix positioning would be preferred to adjusting positioning to fix time.
-&lt;h2&gt;Use TAI time when you need time order or better use incrementing ids.&lt;/h2&gt;
-You want to know about the series of events, such as, in a server log or transaction log.
-
-The problem is UTC goes back in time and as Unix time typically uses UTC, your logs will too. https://en.wikipedia.org/wiki/Unix_time
-
-But, it doesn't have to be this way: TAI time is ordered and not affected by adjustments to keep time in order with our solar cycle, so no leap seconds... that doesn't mean there aren't adjustments, but the adjustments should be such much smaller fractions of a second.
-
-But, even with TAI, that fraction of a second can still get bigger: you don't poll NTP at a rate of a fraction of a second and PC clocks fall out of sync and on VMs sometimes more than expected.
-
-So why not just use an incrementing counter? The order of log lines effectively does this, but assumes that they are written in order and kept in order, so I guess the question here is now that you aggregate your log files to central servers (Splunk, Logstash, etc) are they still in order of events or are they in order of adjustable time stamps.Summary
-&lt;ul&gt;
-	&lt;li&gt;For everyday usage use a Zoned Offset
-&lt;ul&gt;
-	&lt;li&gt;1999-12-31T23:59:59-04:00 [America/New_York]&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-	&lt;li&gt;For scientific calculations use TAI, but how to distinguish from UTC?
-&lt;ul&gt;
-	&lt;li&gt;2017-03-11T14:31:36&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-	&lt;li&gt;For strict ordering of events, don't use time: but keep a reference for indexing (finding the log lines)&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">Now it is 15:31 on the 11-09-2016 and I'm in London. Writing and Reading dates Always use the order or full year, month then day of month. Text ordering is now time ordered 2016-06-06 is always after 2015-06-07 in text and time 06-07-2016 is before 07-06-2015 and after 05-06-2014 in text ordering, but not in time. This useful in table ordering, like when listing files. Local differences don't matter so much (Europe vs USA format) Offset Time The UK has British Summer Time, so that time point is 1 hour ahead of where it should be, so the time is actually 2016-09-11T15:31:00+01:00 (in ISO 8601 format). Zoned Time If I asked you to call me at this time in 6 months, I might not appreciate a call at 2017-03-11T15:31:00+01:00 because I'm then out of Daylight Savings, so instead it's useful to capture the time zone.</summary></entry></feed>
+Copy Scala and Groovy: use the JVM to solve this for you and give you a consistent view of the world and force everyone to map using Java data structure until later... although I'm tempted to checkout the CLR/Mono too.</content><author><name></name></author><summary type="html">I have a crazy idea: create a cross-platform language, no not Java: something better. Primitives are supposed to the simplest form of data in a programming language. So how hard can it be to work with them... Typical representations References (pointers) Boolean Integer numbers Floating point numbers (binary and sometimes decimal) Primitive structures (array, list) Character(s) Boolean is complex In typical computing systems, everything is a 0 or  a 1, except usually nothing is.</summary></entry></feed>
