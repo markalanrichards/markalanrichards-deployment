@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>NHS’s Covid-19 website includes advertiser tracking | Mark Alan Richards</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="NHS’s Covid-19 website includes advertiser tracking" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="https://covid19.nhs.uk/ is the primary website for the NHS&#39;s Covid-19 app. It is referenced in the Android app source code. It has a disfunctional cookie banner The website has a cookie banner asking if you want to accept or decline cookies." />
+<meta property="og:description" content="https://covid19.nhs.uk/ is the primary website for the NHS&#39;s Covid-19 app. It is referenced in the Android app source code. It has a disfunctional cookie banner The website has a cookie banner asking if you want to accept or decline cookies." />
+<link rel="canonical" href="/2020/05/15/covid19-app-website-includes-advertiser-tracking.html" />
+<meta property="og:url" content="/2020/05/15/covid19-app-website-includes-advertiser-tracking.html" />
+<meta property="og:site_name" content="Mark Alan Richards" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-15T11:00:00+00:00" />
+<script type="application/ld+json">
+{"description":"https://covid19.nhs.uk/ is the primary website for the NHS&#39;s Covid-19 app. It is referenced in the Android app source code. It has a disfunctional cookie banner The website has a cookie banner asking if you want to accept or decline cookies.","@type":"BlogPosting","headline":"NHS’s Covid-19 website includes advertiser tracking","dateModified":"2020-05-15T11:00:00+00:00","datePublished":"2020-05-15T11:00:00+00:00","url":"/2020/05/15/covid19-app-website-includes-advertiser-tracking.html","mainEntityOfPage":{"@type":"WebPage","@id":"/2020/05/15/covid19-app-website-includes-advertiser-tracking.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Mark Alan Richards" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Mark Alan Richards</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">NHS&#39;s Covid-19 website includes advertiser tracking</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-05-15T11:00:00+00:00" itemprop="datePublished">May 15, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <div>
+    <p>
+        https://covid19.nhs.uk/ is the primary website for the NHS's Covid-19 app.
+    </p>
+    <p>
+        <a
+            href="https://github.com/nhsx/COVID-19-app-Android-BETA/blob/2a65dbccb3c145ccde1c8ca63735800c047cd5d7/app/src/main/java/uk/nhs/nhsx/sonar/android/app/util/BrowserUtils.kt#L51-L53">It
+            is referenced in the Android app source code.</a>
+    </p>
+</div>
+<div>
+    <h2>It has a disfunctional cookie banner</h2>
+    <p>
+        The website has a cookie banner asking if you want to accept or decline cookies.
+
+    </p>
+    <p>
+        However, without any interaction, advertiser cookies are already being used and you are being tracked
+    </p>
+</div>
+<div>
+    <h2>What does it load?</h2>
+    <p>
+        It loads a Youtube video, that in turn loads Google Doubleclick content.
+    </p>
+</div>
+
+<div>
+    <h2>What does this mean?</h2>
+    <p>
+        The site enrols users into advertiser tracking by Youtube and Doubleclick.
+    </p>
+    <p>
+        Advertiser tracking is typically used to recommend adverts based on your browsing habits.
+    </p>
+    <p>
+        Google demands websites do not Youtube videos on sites without first getting cookie consent.
+    </p>
+    <p>
+        Youtube demands its typical service is not provided to users under the age of 13.
+    </p>
+</div>
+<div>
+    <h2>Which laws are broken?</h2>
+    <ul>
+        <li><em>PECR:</em> (the cookie law) which includes the demand that data unnecessarily collected from users
+            devices requires consent.</li>
+        <li><em>GDPR:</em> Google uses tracking cookies, typically associated with Google accounts and so the data is
+            not just associated with a device, but a user and is therefore personal data and must be obtained with
+            consent. </li>
+    </ul>
+</div>
+<div>
+    <h2>Is this excusable?</h2>
+    <p>No, video is easy on websites without Youtube.</p>
+    <p>Also, not only does Youtube have options to reduce tracking which have not been set, but the NHS can self host their
+        content or use services from video content hosters that are not famous for breaching privacy.</p>
+</div>
+<div>
+    <h2>This seems familiar?</h2>
+    <p>
+        Yes, similar privacy failures regarding Youtube were found in recent posts here.
+    <ul>
+        <li><a href="2019-03-17-ad-tracking-of-childline.html"></a>Childline</li>
+        <li><a href="2019-10-08-British-privacy-regulator-breaches-privacy.html"></a>ICO</li>
+    </ul>
+    </p>
+</div>
+<div>
+    <h2>Video demo</h2>
+    <p>Video showing Youtube and Doubleclick cookies</p>
+    <video controls="" width="960">
+        <source src="/assets/videos/cov19nhs.webm" type="video/webm">
+        <source src="/assets/videos/cov19nhs.mp4" type="video/mp4">
+    </video>
+</div>
+<div id="har-data">
+    <a href="/assets/covid19.zip">Har data.</a>
+</div>
+  </div><a class="u-url" href="/2020/05/15/covid19-app-website-includes-advertiser-tracking.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Mark Alan Richards</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Mark Alan Richards</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/markalanrichards"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">markalanrichards</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

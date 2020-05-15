@@ -1,4 +1,82 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-10-08T23:24:53+00:00</updated><id>/feed.xml</id><title type="html">Mark Alan Richards</title><entry><title type="html">British privacy regulator breaches privacy</title><link href="/2019/10/08/British-privacy-regulator-breaches-privacy.html" rel="alternate" type="text/html" title="British privacy regulator breaches privacy" /><published>2019-10-08T22:47:00+00:00</published><updated>2019-10-08T22:47:00+00:00</updated><id>/2019/10/08/British-privacy-regulator-breaches-privacy</id><content type="html" xml:base="/2019/10/08/British-privacy-regulator-breaches-privacy.html">&lt;p&gt;In April 2018 I emailed the ICO about Twitter receiving identifiable tracking data of what pages users of the ICO
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-05-15T11:34:20+00:00</updated><id>/feed.xml</id><title type="html">Mark Alan Richards</title><entry><title type="html">NHS’s Covid-19 website includes advertiser tracking</title><link href="/2020/05/15/covid19-app-website-includes-advertiser-tracking.html" rel="alternate" type="text/html" title="NHS's Covid-19 website includes advertiser tracking" /><published>2020-05-15T11:00:00+00:00</published><updated>2020-05-15T11:00:00+00:00</updated><id>/2020/05/15/covid19-app-website-includes-advertiser-tracking</id><content type="html" xml:base="/2020/05/15/covid19-app-website-includes-advertiser-tracking.html">&lt;div&gt;
+    &lt;p&gt;
+        https://covid19.nhs.uk/ is the primary website for the NHS's Covid-19 app.
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;a
+            href=&quot;https://github.com/nhsx/COVID-19-app-Android-BETA/blob/2a65dbccb3c145ccde1c8ca63735800c047cd5d7/app/src/main/java/uk/nhs/nhsx/sonar/android/app/util/BrowserUtils.kt#L51-L53&quot;&gt;It
+            is referenced in the Android app source code.&lt;/a&gt;
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;h2&gt;It has a disfunctional cookie banner&lt;/h2&gt;
+    &lt;p&gt;
+        The website has a cookie banner asking if you want to accept or decline cookies.
+
+    &lt;/p&gt;
+    &lt;p&gt;
+        However, without any interaction, advertiser cookies are already being used and you are being tracked
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;h2&gt;What does it load?&lt;/h2&gt;
+    &lt;p&gt;
+        It loads a Youtube video, that in turn loads Google Doubleclick content.
+    &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+    &lt;h2&gt;What does this mean?&lt;/h2&gt;
+    &lt;p&gt;
+        The site enrols users into advertiser tracking by Youtube and Doubleclick.
+    &lt;/p&gt;
+    &lt;p&gt;
+        Advertiser tracking is typically used to recommend adverts based on your browsing habits.
+    &lt;/p&gt;
+    &lt;p&gt;
+        Google demands websites do not Youtube videos on sites without first getting cookie consent.
+    &lt;/p&gt;
+    &lt;p&gt;
+        Youtube demands its typical service is not provided to users under the age of 13.
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;h2&gt;Which laws are broken?&lt;/h2&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;em&gt;PECR:&lt;/em&gt; (the cookie law) which includes the demand that data unnecessarily collected from users
+            devices requires consent.&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;GDPR:&lt;/em&gt; Google uses tracking cookies, typically associated with Google accounts and so the data is
+            not just associated with a device, but a user and is therefore personal data and must be obtained with
+            consent. &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;h2&gt;Is this excusable?&lt;/h2&gt;
+    &lt;p&gt;No, video is easy on websites without Youtube.&lt;/p&gt;
+    &lt;p&gt;Also, not only does Youtube have options to reduce tracking which have not been set, but the NHS can self host their
+        content or use services from video content hosters that are not famous for breaching privacy.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;h2&gt;This seems familiar?&lt;/h2&gt;
+    &lt;p&gt;
+        Yes, similar privacy failures regarding Youtube were found in recent posts here.
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&quot;2019-03-17-ad-tracking-of-childline.html&quot;&gt;&lt;/a&gt;Childline&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;2019-10-08-British-privacy-regulator-breaches-privacy.html&quot;&gt;&lt;/a&gt;ICO&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;h2&gt;Video demo&lt;/h2&gt;
+    &lt;p&gt;Video showing Youtube and Doubleclick cookies&lt;/p&gt;
+    &lt;video controls=&quot;&quot; width=&quot;960&quot;&gt;
+        &lt;source src=&quot;/assets/videos/cov19nhs.webm&quot; type=&quot;video/webm&quot;&gt;
+        &lt;source src=&quot;/assets/videos/cov19nhs.mp4&quot; type=&quot;video/mp4&quot;&gt;
+    &lt;/video&gt;
+&lt;/div&gt;
+&lt;div id=&quot;har-data&quot;&gt;
+    &lt;a href=&quot;/assets/covid19.zip&quot;&gt;Har data.&lt;/a&gt;
+&lt;/div&gt;</content><author><name></name></author><summary type="html">https://covid19.nhs.uk/ is the primary website for the NHS's Covid-19 app. It is referenced in the Android app source code. It has a disfunctional cookie banner The website has a cookie banner asking if you want to accept or decline cookies.</summary></entry><entry><title type="html">British privacy regulator breaches privacy</title><link href="/2019/10/08/British-privacy-regulator-breaches-privacy.html" rel="alternate" type="text/html" title="British privacy regulator breaches privacy" /><published>2019-10-08T22:47:00+00:00</published><updated>2019-10-08T22:47:00+00:00</updated><id>/2019/10/08/British-privacy-regulator-breaches-privacy</id><content type="html" xml:base="/2019/10/08/British-privacy-regulator-breaches-privacy.html">&lt;p&gt;In April 2018 I emailed the ICO about Twitter receiving identifiable tracking data of what pages users of the ICO
     website were visiting.&lt;/p&gt;
 &lt;p&gt;
     &lt;pre&gt;&lt;code&gt;    curl &amp;#x27;https://platform.twitter.com/widgets/widget_iframe.1966f64be47cf16b7a48642c76cc6202.html?origin=https%3A%2F%2Fico.org.uk&amp;amp;settingsEndpoint=https%3A%2F%2Fsyndication.twitter.com%2Fsettings&amp;#x27; \
@@ -789,65 +867,4 @@ This has a hidden &lt;a href=&quot;https://github.com/kjur/jsrsasign/tree/master
 
 &amp;nbsp;
 
-&amp;nbsp;</content><author><name></name></author><summary type="html">Update: Originally titled &quot;NPM is lying to you and Facebook is stealing copyright&quot; I've amended it out of respect to those who weren't happy with this, but this error should reflect on Facebook audit processes (due diligence) of copyright attribution, which would hopefully have caught this. Regarding concerns about attribution to Mozilla in the issue (https://github.com/facebook/react/issues/8789) I think there is a misrepresentation of CC0/dedicated to public domain in the comments: it is not the same as copyright expiry and it's important that the rights holder (which I believe is still Mozilla) is tracked by Facebook even if not attributed in published bundles. If nobody tracked that Obect.is came from Mozilla, then when the page goes, the first to copy the page can sue everyone.</summary></entry><entry><title type="html">Complex Primitives</title><link href="/programming/2016/10/30/complex-primitives.html" rel="alternate" type="text/html" title="Complex Primitives" /><published>2016-10-30T19:16:23+00:00</published><updated>2016-10-30T19:16:23+00:00</updated><id>/programming/2016/10/30/complex-primitives</id><content type="html" xml:base="/programming/2016/10/30/complex-primitives.html">I have a crazy idea: create a cross-platform language, no not Java: something better. Primitives are supposed to the simplest form of data in a programming language. So how hard can it be to work with them...
-&lt;h1&gt;Typical representations&lt;/h1&gt;
-&lt;ul&gt;
-	&lt;li&gt;References (pointers)&lt;/li&gt;
-	&lt;li&gt;Boolean&lt;/li&gt;
-	&lt;li&gt;Integer numbers&lt;/li&gt;
-	&lt;li&gt;Floating point numbers (binary and sometimes decimal)&lt;/li&gt;
-	&lt;li&gt;Primitive structures (array, list)&lt;/li&gt;
-	&lt;li&gt;Character(s)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1&gt;Boolean is complex&lt;/h1&gt;
-In typical computing systems, everything is a 0 or  a 1, except usually nothing is.
-
-CPUs typically look at numbers at bit sets of length 8, 16, 32 or 64: not usually 1.
-
-Although most have somewhere that this doesn't hold true, either with longer primitive sizes (128/256), special floating point versions (56, 80, ...) or slightly weird 31 bitset sizes (bad IBM).
-
-The easiest way to manage boolean is to choose 0 as true or false (often false) and anything else as the opposite. However, what size of bitset do you use? If you use the defacto int then it might be different in different compilers (32bit vs 64bit).
-
-Luckily, all you need to know is the size of the bitset and the offset in memory.
-&lt;h1&gt;Integer is much more complex&lt;/h1&gt;
-So boolean is an offset in ram and a size of the bitset to use: all 0s then it's false and anything else it is true.
-
-Integers share the problem that you need to know the size of the bitset, but suffer a further problem: order and signing.
-
-The signed number part is simple: a bit is reserved at the most significant bit to be used for representing positive (zero) or negative (1: with 2s complement), but order gets complex..
-&lt;h1&gt;Bits and Byte Ordering&lt;/h1&gt;
-So what is order: well that &quot;most significant bit&quot; is the problem. Endian of bits and bytes comes into play (and they're not always the same as each other).
-
-The order of bits varies between processors and usually this problem is something that is more likely to affect you at a very low level (drivers, hardware, etc): to make it more fun most computers have more than one cpu. Your sound card, graphics card, network card, etc might all see bits a different way around: nevermind the busses.
-
-At the software level you usually find everything is the same (let me know if I've got this wrong), but here you suffer byte order differences where different protocols (network, inter-process, file  formats) can each represent things larger than a byte in different order.  This isn't too difficult to solve (https://github.com/markalanrichards/bitcoin/blob/master/src/compat/byteswap.h) you just need to remember to use it everywhere your program interfaces with the world.
-&lt;h1&gt;Floating Points&lt;/h1&gt;
-Luckily floating points are strictly described in IEEE-754, well I say luckily: except the complexities of implementing it mean that not all languages actually adhere to it: &lt;a href=&quot;https://en.wikipedia.org/wiki/Criticism_of_Java#Floating_point_arithmetic&quot;&gt;https://en.wikipedia.org/wiki/Criticism_of_Java#Floating_point_arithmetic&lt;/a&gt;
-&lt;h1&gt;Characters&lt;/h1&gt;
-Characters and Strings are terrifying.
-
-There are hundreds (maybe thousands) of character sets: in a large part because some base character sets (Latin1) have multiple versions for different languages. Not all are easy to work with (I remember something odd about Turkish EBCDIC and xml processing problems as symbols can be remapped). The simplest solution is to make everyone fit into a box and force UTF-8: then hope that nobody adds a BOM, let's hope UTF-8 never gets deprecated.
-&lt;h1&gt;References&lt;/h1&gt;
-So you have a reference to some data.... how do you reference it and what kind of data might you have to reference:
-
-The reference could be a nice compile time fixed size (like a pair of integers, I mean a pair of 64 bit integers).
-
-It might be a variable size (String of characters) holding some JSON: so maybe a block of memory.
-
-Or it might be a continuous stream (/dev/urandom)
-
-Or it might be a channel of offset data (File on disk) with parts that might no longer be available later in the day or new parts that arrive whilst reading.
-
-It's easiest to manage the fixed size case (c style) and then re-use the fixed size blocks for streams of data, but sometimes you need more complex references like File handles.
-
-So a VLQ (https://en.wikipedia.org/wiki/Variable-length_quantity) might do for the simple case, and then a VLQ that contains References to further VLQs might be usable for the rest of the use cases.
-&lt;h1&gt;Arrays and Lists&lt;/h1&gt;
-I don't think I really consider these to be primitive types
-
-Great, I don't need to write these in my language: I can borrow them? Well maybe, except when it comes to mixing primitives with polymorphic types: well maybe I can still use them I guess I can just put the type into the box as the first entry.
-&lt;h1&gt;It's all in the bus&lt;/h1&gt;
-Eventually, much of the data you use ends up moving through the buses on your system and they have different sizes and then on top of that you get fixed sized pages that move over buses, which you hope are an integer multiple of the bus size: typically the one everyone knows that isn't is the MTU (which varies between broadband, ethernet and modem systems).
-
-So when you use these complex primitives you might not want to just use the language primitives: but optimise for the bus/packet/page sizes involved. Should these be primitives? Well that might depend on your architecture and for a cross platform language I guess you should let it be a language specific optimization to curry in an outside primitive.
-&lt;h1&gt;So how to solve this for writing a new language?&lt;/h1&gt;
-Copy Scala and Groovy: use the JVM to solve this for you and give you a consistent view of the world and force everyone to map using Java data structure until later... although I'm tempted to checkout the CLR/Mono too.</content><author><name></name></author><summary type="html">I have a crazy idea: create a cross-platform language, no not Java: something better. Primitives are supposed to the simplest form of data in a programming language. So how hard can it be to work with them... Typical representations References (pointers) Boolean Integer numbers Floating point numbers (binary and sometimes decimal) Primitive structures (array, list) Character(s) Boolean is complex In typical computing systems, everything is a 0 or  a 1, except usually nothing is.</summary></entry></feed>
+&amp;nbsp;</content><author><name></name></author><summary type="html">Update: Originally titled &quot;NPM is lying to you and Facebook is stealing copyright&quot; I've amended it out of respect to those who weren't happy with this, but this error should reflect on Facebook audit processes (due diligence) of copyright attribution, which would hopefully have caught this. Regarding concerns about attribution to Mozilla in the issue (https://github.com/facebook/react/issues/8789) I think there is a misrepresentation of CC0/dedicated to public domain in the comments: it is not the same as copyright expiry and it's important that the rights holder (which I believe is still Mozilla) is tracked by Facebook even if not attributed in published bundles. If nobody tracked that Obect.is came from Mozilla, then when the page goes, the first to copy the page can sue everyone.</summary></entry></feed>
