@@ -1,4 +1,101 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-05-15T11:52:30+00:00</updated><id>/feed.xml</id><title type="html">Mark Alan Richards</title><entry><title type="html">NHS’s Covid-19 website includes advertiser tracking</title><link href="/2020/05/15/covid19-app-website-includes-advertiser-tracking.html" rel="alternate" type="text/html" title="NHS's Covid-19 website includes advertiser tracking" /><published>2020-05-15T11:00:00+00:00</published><updated>2020-05-15T11:00:00+00:00</updated><id>/2020/05/15/covid19-app-website-includes-advertiser-tracking</id><content type="html" xml:base="/2020/05/15/covid19-app-website-includes-advertiser-tracking.html">&lt;div&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-06-11T00:03:07+00:00</updated><id>/feed.xml</id><title type="html">Mark Alan Richards</title><entry><title type="html">British Political Party adds some Russian tracking and control to their website</title><link href="/2020/06/10/political-party-adds-russian-surveillance.html" rel="alternate" type="text/html" title="British Political Party adds some Russian tracking and control to their website" /><published>2020-06-10T23:00:00+00:00</published><updated>2020-06-10T23:00:00+00:00</updated><id>/2020/06/10/political-party-adds-russian-surveillance</id><content type="html" xml:base="/2020/06/10/political-party-adds-russian-surveillance.html">&lt;p&gt;
+    &lt;p&gt;Britain First have loaded web content from a Russian social media site VK.&lt;/p&gt;
+    &lt;p&gt;The loading will sometimes result in identifiable tracking data being sent to VK about the visit to Britain First.&lt;/p&gt;
+    &lt;p&gt;The content is code and can do what it likes on the Britain First page.&lt;/p&gt; 
+&lt;/p&gt;
+&lt;div&gt;
+    &lt;h2&gt;Britain First&lt;/h2&gt;
+    &lt;p&gt;
+        Britain First is well documented online and I do not support them.
+    &lt;/p&gt;
+    &lt;p&gt;
+        Most UK political parties are failing on privacy, please read the ICO report on political parties to understand the landscape if you are interested in learning more.
+    &lt;/p&gt;
+    
+    &lt;p&gt;
+        This post is about a new aspect to the existing problem of online tracking and security of political party websites.
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;h2&gt;What does it load?&lt;/h2&gt;
+    &lt;p&gt;
+        Britain First has been banned by Facebook (although somewhat surprisingly, their website still includes Facebook JavaScript SDK and tracking).
+    &lt;/p&gt;
+    &lt;p&gt;
+        So, Britain First has adopted a different social media network: VK, a Russian social network.
+    &lt;/p&gt;
+    &lt;p&gt;
+        As part of this it appears they load VK&amp;#39;s JavaScript SDK which sometimes shares tracking data with VK https://vk.com/js/api/openapi.js?168
+    &lt;/p&gt;
+    &lt;p&gt;
+        Not every request to the pages will be tracked, as there is a cache header from VK, so a local copy may be used, but not if since deleted (like user cleared cache, max age reached or for the browser saving space may do this), in which case a request with fresh tracking data is sent.
+    &lt;/p&gt;
+    &lt;p&gt;However, the website is vulnerable to whatever VK put in the JavaScript code, so the behaviour can change at any time and present or capture anything on the pages it is loaded on.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+    &lt;h2&gt;What tracking can they get?&lt;/h2&gt;
+    &lt;p&gt;
+        VK get two types of tracking data, those with cookies and those without.
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;h3&gt;Without cookies VK get&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;IP Address: Typically unique to your WiFI router, but can be unique to your browsing device&lt;/li&gt;
+            &lt;li&gt;User-Agent: Browser version, OS&lt;/li&gt;
+            &lt;li&gt;HTTP Referer: the web address your are at, like https://www.britainfirst.org/join&lt;/li&gt;
+            &lt;li&gt;VK have the potential to get more through fingerprinting techniques server side and as they load JaveScript, assisted by the browser side too.&lt;/li&gt;
+        &lt;/ul&gt;
+        
+        &lt;h3&gt;With cookies VK also get&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Unique identifier: Identifies your browser and if VK is loaded on other pages you use, then VK can play a game of Guess Who to work out who you are or may just be given the data, like an email address in query parameters (this happens too much on the internet)&lt;/li&gt;
+            &lt;li&gt;Account identifier: If you have a VK account, then they&amp;#39;ll know about your visit to Britain First, regardless of whether you expressed interest in Britain First on the VK site&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;h2&gt;What does this all mean?&lt;/h2&gt;
+    &lt;p&gt;
+        I know nothing about VK. Apart from they are getting data from some visits to Britain First. They may ignore it, they may use it.
+    &lt;/p&gt;
+&lt;/div&gt;&lt;div&gt;
+    &lt;h2&gt;My Opinion&lt;/h2&gt;
+    &lt;p&gt;
+        Given the news stories about social media targeting in elections and also Russian meddling, we should be cautious of more companies getting browsing habit data.
+    &lt;/p&gt;
+    &lt;p&gt;
+        If VK intend to protect privacy, why load the JS from their domain and not one with no cookies.&lt;br/&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+        If VK intend to protect privacy, who not drop the referer with a referer-policy on their script tag.
+    &lt;/p&gt;
+    &lt;p&gt;
+        If VK intend to invade privacy, why are they setting cache headers that will miss many requests?
+    &lt;/p&gt;
+    &lt;p&gt;
+        Whatever their intent now, they are a single number change in their own code base from tracking every request; maybe not in the most efficient manner, but they could easily add pixel tracking with a little more.
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;h2&gt;HTML fragment&lt;/h2&gt;
+    &lt;div&gt;
+        &lt;p&gt;This html is loaded in the root document&lt;/p&gt;
+        &lt;p&gt;&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;https://vk.com/js/api/openapi.js?168&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&lt;/p&gt;
+        
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;h2&gt;Video demo&lt;/h2&gt;
+    &lt;p&gt;Video showing VK cookies paired with a referer header for the page to Join Britain First&lt;/p&gt;
+    &lt;video controls=&quot;&quot; width=&quot;960&quot;&gt;
+        &lt;source src=&quot;/assets/videos/britainfirst.webm&quot; type=&quot;video/webm&quot;&gt;
+        &lt;source src=&quot;/assets/videos/britainfirst.mp4&quot; type=&quot;video/mp4&quot;&gt;
+    &lt;/video&gt;
+&lt;/div&gt;
+&lt;div id=&quot;har-data&quot;&gt;
+    &lt;a href=&quot;/assets/britainfirst.zip&quot;&gt;Har data.&lt;/a&gt;
+&lt;/div&gt;</content><author><name></name></author><summary type="html">Britain First have loaded web content from a Russian social media site VK. The loading will sometimes result in identifiable tracking data being sent to VK about the visit to Britain First. The content is code and can do what it likes on the Britain First page. Britain First Britain First is well documented online and I do not support them. Most UK political parties are failing on privacy, please read the ICO report on political parties to understand the landscape if you are interested in learning more. This post is about a new aspect to the existing problem of online tracking and security of political party websites. What does it load? Britain First has been banned by Facebook (although somewhat surprisingly, their website still includes Facebook JavaScript SDK and tracking). So, Britain First has adopted a different social media network: VK, a Russian social network. As part of this it appears they load VK&amp;#39;s JavaScript SDK which sometimes shares tracking data with VK https://vk.com/js/api/openapi.js?168 Not every request to the pages will be tracked, as there is a cache header from VK, so a local copy may be used, but not if since deleted (like user cleared cache, max age reached or for the browser saving space may do this), in which case a request with fresh tracking data is sent. However, the website is vulnerable to whatever VK put in the JavaScript code, so the behaviour can change at any time and present or capture anything on the pages it is loaded on.</summary></entry><entry><title type="html">NHS’s Covid-19 website includes advertiser tracking</title><link href="/2020/05/15/covid19-app-website-includes-advertiser-tracking.html" rel="alternate" type="text/html" title="NHS's Covid-19 website includes advertiser tracking" /><published>2020-05-15T11:00:00+00:00</published><updated>2020-05-15T11:00:00+00:00</updated><id>/2020/05/15/covid19-app-website-includes-advertiser-tracking</id><content type="html" xml:base="/2020/05/15/covid19-app-website-includes-advertiser-tracking.html">&lt;div&gt;
     &lt;p&gt;
         https://covid19.nhs.uk/ is the primary website for the NHS's Covid-19 app.
     &lt;/p&gt;
@@ -821,50 +918,4 @@ This is the key reason why Agile Software Development fails as a project managem
 
 &amp;nbsp;
 
-&amp;nbsp;</content><author><name></name></author><summary type="html">&amp;nbsp;</summary></entry><entry><title type="html">NPM is lying to you and Facebook misses copyright attribution</title><link href="/2017/01/14/npm-is-lying-to-you-and-facebook-misses-copyright-attribution.html" rel="alternate" type="text/html" title="NPM is lying to you and Facebook misses copyright attribution" /><published>2017-01-14T18:24:41+00:00</published><updated>2017-01-14T18:24:41+00:00</updated><id>/2017/01/14/npm-is-lying-to-you-and-facebook-misses-copyright-attribution</id><content type="html" xml:base="/2017/01/14/npm-is-lying-to-you-and-facebook-misses-copyright-attribution.html">Update: Originally titled &quot;NPM is lying to you and Facebook is stealing copyright&quot; I've amended it out of respect to those who weren't happy with this, but this error should reflect on Facebook audit processes (due diligence) of copyright attribution, which would hopefully have caught this. Regarding concerns about attribution to Mozilla in the issue (https://github.com/facebook/react/issues/8789) I think there is a misrepresentation of CC0/dedicated to public domain in the comments: it is not the same as copyright expiry and it's important that the rights holder (which I believe is still Mozilla) is tracked by Facebook even if not attributed in published bundles. If nobody tracked that Obect.is came from Mozilla, then when the page goes, the first to copy the page can sue everyone.
-
-Firstly, copyright is complicated and getting this right is difficult and I don't believe that the npm website is trying to lie to you, but that some of the projects on there are (hopefully accidentally) doing so.
-
-No billion dollar company has the right to get this wrong and they should all be running regular audits, but even they might slip up and if they do, &lt;a href=&quot;http://www.groklaw.net/&quot;&gt;SCO vs open source&lt;/a&gt;  and &lt;a href=&quot;https://news.ycombinator.com/item?id=11722514&quot;&gt;Google's 9 lines &lt;/a&gt;were painful moments, so if they could lead by example it would be great. I do hope everyone believes individual developers should be given a little room on accuracy in this domain, we're unlikely to be lawyers, but if you do spot this kind of thing... please please please let the parties affected know in a respectful fashion that allows them to resolve it sooner rather than later, it is one thing to slip up for a short period of time and another as it gets longer: the longer it is left without resolution, the more dependent projects that might be affected too.
-
-When you look at the licences in a library in npm, you think great it is Apache, BSD, MIT, etc and I can probably use it pretty freely.
-
-When it's LGPL, GPL, AGPL or EPL it gets more complicated, but may not be impossible... it might even be okay if you wish to adopt these.
-
-Well, those licences aren't complete in npm for many libraries. Partly because of wonderful technologies like webpack that bundle your code with your dependent code, but don't, by default, facilitate creating a combined licence file in the process.
-
-npm isn't the only party getting this wrong, too many open source tools encourage you to label a project as one licence, when in truth it is more likely that your project's direct code is one licence, but when packaged it is a multi-licence project.
-
-To make matters more complicated, some source code repositories include third party code directly in their source repository (perhaps because it isn't available from the repository they choose for the project, like npm) and this results in the source code repository itself being mixed licence... how do I fit that in the Github licence option?
-
-If you publish code that is a mix of others work, including in a bundle or even as just accompanying assets, please ensure that the licences are published too. At least we don't have to make &lt;a href=&quot;http://moba.i.daimler.com/bai-cars/ba/foss/content/en/licence_agreement.html&quot;&gt;printable booklets&lt;/a&gt; to ship with physical products.
-&lt;h1&gt;&lt;a href=&quot;https://facebook.github.io/react/&quot;&gt;react&lt;/a&gt;&lt;/h1&gt;
-Facebook is a big multinational software company. They obviously know about copyright law in their legal teams.
-
-Well they've missed something... their current version of the &lt;a href=&quot;https://facebook.github.io/react/&quot;&gt;React&lt;/a&gt; website uses this wonderful JavaScript &lt;a href=&quot;https://facebook.github.io/react/js/react.js&quot;&gt;file&lt;/a&gt;  which is full of copyright statements about Facebook, but none for third party libraries.
-
-Hmm... strange, their &lt;a href=&quot;https://www.npmjs.com/package/react&quot;&gt;library&lt;/a&gt; has dependencies on &lt;a href=&quot;https://www.npmjs.com/package/object-assign&quot;&gt;object-assign&lt;/a&gt; (amongst others).
-
-Let's npm install it and see what's in the dist folder. There's a basic react.min.js file and there's an &lt;a href=&quot;https://facebook.github.io/react/docs/addons.html&quot;&gt;add-ons&lt;/a&gt; one that's also available online at the version I'm seeing locally: &lt;a href=&quot;https://unpkg.com/react@15.4.2/dist/react-with-addons.js&quot;&gt;15.4.2&lt;/a&gt;
-
-Strange, again it only has Facebook copyright in, but no third parties.
-
-Their add-ons page doesn't exactly tell you about the embedded object-assign copyright &lt;a href=&quot;https://github.com/sindresorhus/object-assign/blob/master/license&quot;&gt;licence&lt;/a&gt; which is MIT and requires that if you include object-assign in your own works you need to include their MIT licence with it so that users know that parts of the React software include object-assign.
-
-Bad Facebook, not only breaching copyright, but as developers often use them as a reference for how to build web pages, they risk setting a bad example for how to manage copyright. Their legal team should be on top this, ensuring a regular audit happens and helping to oversee it.
-
-They have a similar &lt;a href=&quot;https://github.com/facebook/draft-js/issues/944&quot;&gt;issue&lt;/a&gt; with &lt;a href=&quot;https://facebook.github.io/draft-js/&quot;&gt;Draft.js&lt;/a&gt;
-&lt;h1&gt;&lt;a href=&quot;https://github.com/kjur/jsrsasign&quot;&gt;jsrsasign&lt;/a&gt;&lt;/h1&gt;
-I spotted jsrsasign did this, but I've seen it before. Sorry to out jsrsasign, it looks like a great project... Javascript encryption enables client-side private keys and object level security instead of passwords over only network level https (mutual auth is great for your enterprises' servers, but isn't catching on for the open web).
-
-Make sure you understand encryption export law if you wish to use it, I won't pretend I know enough to offer advice and &lt;a href=&quot;https://www.thoughtworks.com/insights/blog/encryption-open-source-and-export-control&quot;&gt;ThoughtWorks&lt;/a&gt; have been good enough to offer some, but &lt;em&gt;&lt;strong&gt;you should check with a legal expert&lt;/strong&gt;&lt;/em&gt;.
-
-This has a hidden &lt;a href=&quot;https://github.com/kjur/jsrsasign/tree/master/ext&quot;&gt;ext&lt;/a&gt; folder when attempting to determine how to reference open source licences that you would need to publish with your end product, because this isn't referenced in npm. I think it can be, but unluckily jsrsasign haven't yet... hopefully they will soon.
-
-&amp;nbsp;
-
-&amp;nbsp;
-
-&amp;nbsp;
-
-&amp;nbsp;</content><author><name></name></author><summary type="html">Update: Originally titled &quot;NPM is lying to you and Facebook is stealing copyright&quot; I've amended it out of respect to those who weren't happy with this, but this error should reflect on Facebook audit processes (due diligence) of copyright attribution, which would hopefully have caught this. Regarding concerns about attribution to Mozilla in the issue (https://github.com/facebook/react/issues/8789) I think there is a misrepresentation of CC0/dedicated to public domain in the comments: it is not the same as copyright expiry and it's important that the rights holder (which I believe is still Mozilla) is tracked by Facebook even if not attributed in published bundles. If nobody tracked that Obect.is came from Mozilla, then when the page goes, the first to copy the page can sue everyone.</summary></entry></feed>
+&amp;nbsp;</content><author><name></name></author><summary type="html">&amp;nbsp;</summary></entry></feed>
